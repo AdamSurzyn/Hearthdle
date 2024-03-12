@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../ui/playButton.scss";
 const PlayButton = () => {
   return (
     <Link to="/hearthdleGame">
-      <button>Play!</button>
+      <button className="image-button">Play</button>
     </Link>
   );
 };
