@@ -4,7 +4,7 @@ import "../ui/playButton.scss";
 const PlayButton = () => {
   return (
     <Link to="/hearthdleGame">
-      <button className="image-button">Play</button>
+      <button className="image-button"></button>
     </Link>
   );
 };
