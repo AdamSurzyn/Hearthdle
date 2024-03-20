@@ -13,3 +13,5 @@ const clientToken = async () => {
   });
   const data = await response.json();
 };
+
+export default clientToken;
