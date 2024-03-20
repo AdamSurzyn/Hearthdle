@@ -1,11 +1,11 @@
-$instruction-min-margin: 10px;
-$instruction-max-margin: 10%;
+$instruction-min-margin: 6px;
+$instruction-max-margin: 8px;
 
 .instruction {
     display: grid;
+    padding-left: 15px;
 }
 
 .instruction *:not(li) {
     margin-left: max(#{$instruction-max-margin}, $instruction-min-margin);
-    margin-right: max(#{$instruction-max-margin}, $instruction-min-margin);
 }
