@@ -1,0 +1,23 @@
+@import url("https: //fonts.googleapis.com/css2?family=Aboreto&display=swap");
+
+$bg-image: url("../assets/1920x1080-hearthstone-background-1920-x-1080-2cx6b3fx3zpz876m.webp");
+
+@mixin darkened-background {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), $bg-image;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.container {
+    @include darkened-background;
+    color: white;
+    display: grid;
+    font-family: "Aboreto";
+    width: 100%;
+    padding: 20px 0px;
+    h1, .footer, a, .instruction .center{
+        place-self: center;
+    }
+}
+

@@ -1,9 +1,9 @@
 import React from "react";
-
+import "./instruction.scss";
 const Instruction = () => {
   return (
-    <div>
-      <h1>Rules</h1>
+    <div className="instruction">
+      <h1 className="center">Rules</h1>
       <h3>Gameplay</h3>
       <ul>
         <li>

@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Game from "./components/game";
+import Game from "./pages/game";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
