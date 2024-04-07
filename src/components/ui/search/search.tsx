@@ -1,6 +1,6 @@
 import React from "react";
-import "../ui/search.scss";
-import { useCardsQuery } from "../hooks/cardsQuery";
+import "../../ui/search/search.scss";
+import { useCardsQuery } from "../../hooks/cardsQuery";
 const futureSearch = () => {};
 
 const Search = () => {
@@ -10,7 +10,7 @@ const Search = () => {
     <div className="card-search-container">
       <input
         className="card-search"
-        type="text"
+        type="search"
         onChange={futureSearch}
         placeholder="What card?"
       ></input>

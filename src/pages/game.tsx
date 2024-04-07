@@ -1,8 +1,7 @@
-import Search from "../components/ui/search";
+import Search from "../components/ui/search/search";
 import Grid from "../components/ui/grid";
 import "../pages/game.scss";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { useCardsQuery } from "../components/hooks/cardsQuery";
 
 const blizzardQueryClient = new QueryClient();
 const Game = () => {
