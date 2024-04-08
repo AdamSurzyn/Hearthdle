@@ -38,3 +38,9 @@
     color: #dac9a1;
     font-size: 16px;
 }
+
+.scroll {
+    @include search-style();
+    overflow-y: scroll;
+    height: 30vh;
+}
