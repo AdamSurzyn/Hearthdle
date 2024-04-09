@@ -10,6 +10,10 @@
     justify-content: center;
 }
 
+.card-search-list-container {
+    position: relative;
+}
+
 .card-search{
     @include search-style();
     max-width: 200px;
@@ -18,6 +22,7 @@
     height: 20px;
     outline: none;
     border-radius: 5px 0 0 5px;
+    height: 36px;
 }
 
 .search-button{
@@ -43,4 +48,9 @@
     @include search-style();
     overflow-y: scroll;
     height: 30vh;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
 }

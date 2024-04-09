@@ -13,3 +13,9 @@ export interface CardCommonAttributes {
   slug: string;
   text: string;
 }
+
+export interface CardsQueryData {
+  cards: any;
+  isLoading: boolean;
+  error?: Error;
+}
