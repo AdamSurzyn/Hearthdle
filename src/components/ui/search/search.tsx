@@ -1,27 +1,38 @@
 import React, { useState } from "react";
 import "../../ui/search/search.scss";
-import { useCardsQuery } from "../../hooks/cardsQuery";
 import { CardCommonAttributes } from "./searchTypes";
 import Scroll from "./scroll";
 import SearchList from "./searchList";
 import { CardsQueryData } from "./searchTypes";
-
+import { useQuery } from "react-query";
+import { allCards } from "../../../features/getCards";
 const Search = () => {
   let typingTimer: NodeJS.Timeout | undefined;
   const [searchField, setSearchField] = useState("");
-  const { cards, isLoading, error }: CardsQueryData =
-    useCardsQuery() as CardsQueryData;
-  //! Czy to jest bezpieczne? Nie moglem w zaden inny sposob sprawic, zeby dzialalo...
+  const useQueryCards = () => {
+    const {
+      error,
+      data: cards,
+      isLoading,
+    } = useQuery<CardsQueryData, Error>({
+      queryKey: ["cardsQuery"],
+      queryFn: allCards,
+    });
+
+    return { cards, isLoading, error };
+  };
+
+  const { cards, isLoading, error } = useQueryCards();
+
   if (isLoading) {
     return <div className="card-search-container">Loading...</div>;
-    //! Czy posiadanie tej samej klasy co kontener searchu jest ok, zeby miec loading w tej samej pozycji co searchbar?
   }
 
   if (error) {
     return <div>An error occured : {error.message}</div>;
   }
 
-  const filteredCards = cards.cards.filter((card: CardCommonAttributes) => {
+  const filteredCards = cards?.cards.filter((card: CardCommonAttributes) => {
     return card.name.toLowerCase().includes(searchField);
   });
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +52,7 @@ const Search = () => {
           onChange={handleSearchInputChange}
           placeholder="What card?"
         ></input>
-        {searchField && cards.cards !== undefined && (
+        {searchField && cards?.cards !== undefined && (
           <Scroll>
             <SearchList filteredCards={filteredCards}></SearchList>
           </Scroll>
