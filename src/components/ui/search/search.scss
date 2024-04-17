@@ -12,12 +12,14 @@
 
 .card-search-list-container {
     position: relative;
+    width: max(70%, 300px);
+    
 }
 
 .card-search{
     @include search-style();
-    max-width: 200px;
     border-right: none;
+    min-width: 100%;
     padding: 5px;
     height: 20px;
     outline: none;
