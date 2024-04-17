@@ -8,7 +8,7 @@ interface FilteredCardsProps {
 
 const SearchList: React.FC<FilteredCardsProps> = ({ filteredCards }) => {
   const cards = filteredCards.map((card) => (
-    <SearchCard key={card.id} cardData={card}></SearchCard>
+    <SearchCard key={card.id} cardData={card} />
   ));
   return <div>{cards}</div>;
 };
