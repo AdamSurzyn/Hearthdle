@@ -21,7 +21,14 @@ const router = createBrowserRouter([
     element: <Game />,
   },
 ]);
-const blizzardQueryClient = new QueryClient();
+const blizzardQueryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      //The cards don't change too much so we can stale the data for 10 minutes
+      staleTime: 600000,
+    },
+  },
+});
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={blizzardQueryClient}>

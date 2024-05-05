@@ -9,20 +9,15 @@ import { allCards } from "../../../features/getCards";
 const Search = () => {
   let typingTimer: NodeJS.Timeout | undefined;
   const [searchField, setSearchField] = useState("");
-  const useQueryCards = () => {
-    const {
-      error,
-      data: cards,
-      isLoading,
-    } = useQuery<CardsQueryData, Error>({
-      queryKey: ["cardsQuery"],
-      queryFn: allCards,
-    });
 
-    return { cards, isLoading, error };
-  };
-
-  const { cards, isLoading, error } = useQueryCards();
+  const {
+    error,
+    data: cards,
+    isLoading,
+  } = useQuery<CardsQueryData, Error>({
+    queryKey: ["cardsQuery"],
+    queryFn: allCards,
+  });
 
   if (isLoading) {
     return <div className="card-search-container">Loading...</div>;
