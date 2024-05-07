@@ -1,5 +1,5 @@
 import React from "react";
-import { CardCommonAttributes } from "./searchTypes";
+import { CardCommonAttributes } from "../../../types/searchTypes";
 interface SearchCardProps {
   cardData: CardCommonAttributes;
 }

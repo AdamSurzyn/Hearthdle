@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../../ui/search/search.scss";
-import { CardCommonAttributes } from "./searchTypes";
+import { CardCommonAttributes } from "../../../types/searchTypes";
 import Scroll from "./scroll";
 import SearchList from "./searchList";
-import { CardsQueryData } from "./searchTypes";
+import { CardsQueryData } from "../../../types/searchTypes";
 import { useQuery } from "react-query";
 import { allCards } from "../../../features/getCards";
 const Search = () => {
@@ -30,6 +30,7 @@ const Search = () => {
   const filteredCards = cards?.cards.filter((card: CardCommonAttributes) => {
     return card.name.toLowerCase().includes(searchField);
   });
+  //Waits 400ms to search after input
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(typingTimer);
     const inputValue = e.target.value;

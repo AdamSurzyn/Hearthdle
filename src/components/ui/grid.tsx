@@ -1,6 +1,6 @@
 import React from "react";
 import "../ui/grid.scss";
-import { CardCommonAttributes } from "./search/searchTypes";
+import { CardCommonAttributes } from "../../types/searchTypes";
 
 const Grid = ({ correctCard }: { correctCard: CardCommonAttributes }) => {
   return (

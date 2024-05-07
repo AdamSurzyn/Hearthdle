@@ -1,4 +1,4 @@
-import { CardCommonAttributes } from "../components/ui/search/searchTypes";
+import { CardCommonAttributes } from "../types/searchTypes";
 
 export const randomCard = (cardsCollection: CardCommonAttributes[]) => {
   const CardsCollectionLength = cardsCollection.length;
