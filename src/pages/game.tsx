@@ -25,7 +25,7 @@ const Game = () => {
   }
 
   const RandomCard = randomCard(cards?.cards);
-
+  console.log("");
   return (
     <div className="container">
       <Search></Search>
