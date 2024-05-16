@@ -1,7 +1,7 @@
 import React from "react";
 
-const header = () => {
-  return <h1>Welcome to Hearthdle!</h1>;
+const Header = () => {
+  return <h1 className="center">Welcome to Hearthdle!</h1>;
 };
 
-export default header;
+export default Header;

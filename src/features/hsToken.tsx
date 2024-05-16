@@ -1,5 +1,12 @@
-const clientId = "";
-const clientSecret = "";
+const clientId = process.env.REACT_APP_BATTLENET_USERNAME;
+const clientSecret = process.env.REACT_APP_BATTLENET_PASSWORD;
+
+type BattlenetResponse = {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  sub: string;
+};
 
 const clientToken = async () => {
   const response = await fetch("https://oauth.battle.net/token", {
@@ -11,7 +18,8 @@ const clientToken = async () => {
       grant_type: "client_credentials",
     }),
   });
-  const data = await response.json();
+  const data: BattlenetResponse = await response.json();
+  return data.access_token;
 };
 
 export default clientToken;

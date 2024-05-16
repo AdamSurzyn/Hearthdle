@@ -1,0 +1,64 @@
+@mixin search-style{
+    background: #2f3640;
+    color: #dac9a1;
+    border: 3px solid #cc8100;
+}
+
+.card-search-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-search-list-container {
+    position: relative;
+    width: max(70%, 300px);
+    
+}
+
+.card-search{
+    @include search-style();
+    border-right: none;
+    min-width: 100%;
+    padding: 5px;
+    height: 20px;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+    height: 57px;
+    text-align: justify;
+    letter-spacing: 3px;
+    font-size: large;
+}
+
+.search-button{
+    @include search-style();
+    height: 57px;
+    min-width: 50px;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    text-align: justify;
+    letter-spacing: 2px;
+    font-size: larger;
+}
+
+.search-card {
+    @include search-style();
+    margin-top: 8px;
+    padding: 8px;
+    border: 3px solid #cc8100;
+    border-radius: 5px;
+    background-color: #2f3640;
+    color: #dac9a1;
+    font-size: 16px;
+}
+
+.scroll {
+    @include search-style();
+    overflow-y: scroll;
+    height: 30vh;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
