@@ -19,7 +19,12 @@ const Game = () => {
   });
 
   if (isLoading) {
-    return <div className="card-search-container">Loading...</div>;
+    return (
+      <div className="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
+    );
   }
 
   if (error) {
