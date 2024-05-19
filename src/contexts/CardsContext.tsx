@@ -7,34 +7,34 @@ import {
 } from "react";
 import { CardCommonAttributes } from "../types/searchTypes";
 
-type ContextSearchCard = {
-  searchCard: CardCommonAttributes | null;
-  setSearchCard: Dispatch<SetStateAction<CardCommonAttributes | null>>;
+type ContextChosenCard = {
+  choosenCard: CardCommonAttributes | null;
+  setChosenCard: Dispatch<SetStateAction<CardCommonAttributes | null>>;
 };
 
-const SearchCardContext = createContext<ContextSearchCard | null>(null);
+const ChosenCardContext = createContext<ContextChosenCard | null>(null);
 
-export const SearchCardProvider = ({
+export const ChosenCardProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [searchCard, setSearchCard] = useState<CardCommonAttributes | null>(
+  const [choosenCard, setChosenCard] = useState<CardCommonAttributes | null>(
     null
   );
 
   return (
-    <SearchCardContext.Provider value={{ searchCard, setSearchCard }}>
+    <ChosenCardContext.Provider value={{ choosenCard, setChosenCard }}>
       {children}
-    </SearchCardContext.Provider>
+    </ChosenCardContext.Provider>
   );
 };
 
-export const useSearchCardContext = () => {
-  const ctx = useContext(SearchCardContext);
+export const useChosenCardContext = () => {
+  const ctx = useContext(ChosenCardContext);
 
   if (!ctx) {
-    throw Error("Missing SearchCardContext, it's not wrapped in the provider");
+    throw Error("Missing ChosenCardContext, it's not wrapped in the provider");
   }
 
   return ctx;
