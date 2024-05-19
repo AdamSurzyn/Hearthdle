@@ -3,7 +3,7 @@ import "../ui/grid.scss";
 import { CardCommonAttributes } from "../../types/searchTypes";
 
 interface GridCardAttributes {
-  correctCard: CardCommonAttributes;
+  correctCard: CardCommonAttributes | undefined;
 }
 
 const Grid = ({ correctCard }: GridCardAttributes) => {

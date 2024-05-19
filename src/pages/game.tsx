@@ -18,23 +18,24 @@ const Game = () => {
     queryFn: getAllCards,
   });
 
-  if (isLoading) {
-    return (
-      <div className="lds-ripple">
-        <div></div>
-        <div></div>
-      </div>
-    );
-  }
-
   if (error) {
     return <div>An error occured : {error.message}</div>;
   }
 
   const randomCard = pickRandomCard(cards?.cards);
+
   return (
     <div className="container">
-      <Search />
+      {isLoading ? (
+        <div className="spinner-container">
+          <div className="spinner">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      ) : (
+        <Search />
+      )}
       <Grid correctCard={randomCard} />
     </div>
   );
