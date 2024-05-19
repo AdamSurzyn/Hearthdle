@@ -4,7 +4,7 @@ import "../pages/game.scss";
 import { CardsQueryData } from "../types/searchTypes";
 import { useQuery } from "react-query";
 import { getAllCards } from "../features/getCards";
-import { randomCard } from "../utils/randomCard";
+import { pickRandomCard } from "../utils/randomCard";
 import { useChosenCardContext } from "../contexts/CardsContext";
 
 const Game = () => {
@@ -31,7 +31,7 @@ const Game = () => {
     return <div>An error occured : {error.message}</div>;
   }
 
-  const RandomCard = randomCard(cards?.cards);
+  const RandomCard = pickRandomCard(cards?.cards);
   console.log("");
   return (
     <div className="container">

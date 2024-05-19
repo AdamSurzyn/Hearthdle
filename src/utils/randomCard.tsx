@@ -1,6 +1,6 @@
 import { CardCommonAttributes } from "../types/searchTypes";
 
-export const randomCard = (cardsCollection: CardCommonAttributes[]) => {
+export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
   const CardsCollectionLength = cardsCollection.length;
   const randomCardsCollectionIndex = Math.floor(
     Math.random() * CardsCollectionLength
