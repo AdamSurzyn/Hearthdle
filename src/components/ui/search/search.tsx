@@ -5,7 +5,7 @@ import Scroll from "./scroll";
 import SearchList from "./searchList";
 import { CardsQueryData } from "../../../types/searchTypes";
 import { useQuery } from "react-query";
-import { allCards } from "../../../features/getCards";
+import { getAllCards } from "../../../features/getCards";
 const Search = () => {
   let typingTimer: NodeJS.Timeout | undefined;
   const [searchField, setSearchField] = useState("");
@@ -16,7 +16,7 @@ const Search = () => {
     isLoading,
   } = useQuery<CardsQueryData, Error>({
     queryKey: ["cardsQuery"],
-    queryFn: allCards,
+    queryFn: getAllCards,
   });
 
   if (isLoading) {
