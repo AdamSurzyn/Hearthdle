@@ -34,8 +34,8 @@ const Game = () => {
   const randomCard = pickRandomCard(cards?.cards);
   return (
     <div className="container">
-      <Search></Search>
-      <Grid correctCard={randomCard}></Grid>
+      <Search />
+      <Grid correctCard={randomCard} />
     </div>
   );
 };
