@@ -31,11 +31,11 @@ const Game = () => {
     return <div>An error occured : {error.message}</div>;
   }
 
-  const RandomCard = pickRandomCard(cards?.cards);
+  const randomCard = pickRandomCard(cards?.cards);
   return (
     <div className="container">
       <Search></Search>
-      <Grid correctCard={RandomCard}></Grid>
+      <Grid correctCard={randomCard}></Grid>
     </div>
   );
 };
