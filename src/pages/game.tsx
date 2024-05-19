@@ -32,7 +32,6 @@ const Game = () => {
   }
 
   const RandomCard = pickRandomCard(cards?.cards);
-  console.log("");
   return (
     <div className="container">
       <Search></Search>
