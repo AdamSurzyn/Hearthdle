@@ -13,7 +13,6 @@ type ContextSearchCard = {
 };
 
 const SearchCardContext = createContext<ContextSearchCard | null>(null);
-export default SearchCardContext;
 
 export const SearchCardProvider = ({
   children,
@@ -37,4 +36,6 @@ export const useSearchCardContext = () => {
   if (!ctx) {
     throw Error("Missing SearchCardContext, it's not wrapped in the provider");
   }
+
+  return ctx;
 };
