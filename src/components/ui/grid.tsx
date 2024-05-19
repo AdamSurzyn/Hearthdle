@@ -2,7 +2,11 @@ import React from "react";
 import "../ui/grid.scss";
 import { CardCommonAttributes } from "../../types/searchTypes";
 
-const Grid = ({ correctCard }: { correctCard: CardCommonAttributes }) => {
+interface GridCardAttributes {
+  correctCard: CardCommonAttributes;
+}
+
+const Grid = ({ correctCard }: GridCardAttributes) => {
   return (
     <div className="cards-grid-container">
       <div className="card">Example1</div>
