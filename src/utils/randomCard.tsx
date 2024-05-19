@@ -8,4 +8,5 @@ export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
     );
     return cardsCollection[randomCardsCollectionIndex];
   }
+  return null;
 };

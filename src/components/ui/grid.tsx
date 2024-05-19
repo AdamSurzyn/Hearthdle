@@ -3,10 +3,14 @@ import "../ui/grid.scss";
 import { CardCommonAttributes } from "../../types/searchTypes";
 
 interface GridCardAttributes {
-  correctCard: CardCommonAttributes | undefined;
+  correctCard: CardCommonAttributes | null;
+  choosenCard: CardCommonAttributes | null;
 }
 
-const Grid = ({ correctCard }: GridCardAttributes) => {
+const Grid = ({ correctCard, choosenCard }: GridCardAttributes) => {
+  if (!choosenCard) {
+    return null;
+  }
   return (
     <div className="cards-grid-container">
       <div className="card">Example1</div>

@@ -36,7 +36,10 @@ const Game = () => {
       ) : (
         <Search />
       )}
-      <Grid correctCard={randomCard} />
+      <Grid
+        correctCard={randomCard}
+        choosenCard={currentChosenCard.choosenCard}
+      />
     </div>
   );
 };
