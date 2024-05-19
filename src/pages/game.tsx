@@ -4,7 +4,7 @@ import "../pages/game.scss";
 import { CardsQueryData } from "../types/searchTypes";
 import { useQuery } from "react-query";
 import { getAllCards } from "../features/getCards";
-import { pickRandomCard } from "../utils/randomCard";
+import { pickRandomCard, replaceIdWithName } from "../utils/utils";
 import { useChosenCardContext } from "../contexts/CardsContext";
 
 const Game = () => {
@@ -23,7 +23,10 @@ const Game = () => {
   }
 
   const randomCard = pickRandomCard(cards?.cards);
-
+  //Replaces id's with names according to metadata
+  replaceIdWithName(randomCard);
+  replaceIdWithName(currentChosenCard.choosenCard);
+  console.log(randomCard);
   return (
     <div className="container">
       {isLoading ? (
