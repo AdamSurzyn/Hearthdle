@@ -3,19 +3,19 @@ import Grid from "../components/ui/grid";
 import "../pages/game.scss";
 import { CardsQueryData } from "../types/searchTypes";
 import { useQuery } from "react-query";
-import { allCards } from "../features/getCards";
+import { getAllCards } from "../features/getCards";
 import { randomCard } from "../utils/randomCard";
-import { useSearchCardContext } from "../contexts/CardsContext";
+import { useChosenCardContext } from "../contexts/CardsContext";
 
 const Game = () => {
-  const currentSearchCard = useSearchCardContext();
+  const currentChosenCard = useChosenCardContext();
   const {
     error,
     data: cards,
     isLoading,
   } = useQuery<CardsQueryData, Error>({
     queryKey: ["cardsQuery"],
-    queryFn: allCards,
+    queryFn: getAllCards,
   });
 
   if (isLoading) {
