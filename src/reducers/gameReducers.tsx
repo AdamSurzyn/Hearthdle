@@ -4,7 +4,10 @@ import { GameAction, CardPair } from "../types/gameReducerTypes";
 
 export default function gameReducer(cards: CardPair, action: GameAction) {
   switch (action.type) {
-    case "FAKE": {
+    case "WRONG": {
+      return [cards];
+    }
+    case "RIGHT": {
       return [cards];
     }
     default: {
@@ -12,3 +15,4 @@ export default function gameReducer(cards: CardPair, action: GameAction) {
     }
   }
 }
+//Mana, Class, Type
