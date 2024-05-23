@@ -10,7 +10,6 @@ export const SearchCard: React.FC<SearchCardProps> = ({ cardData }) => {
 
   const setCurrentChosenCard = () => {
     setChosenCard(cardData);
-    console.log(cardData);
   };
   return (
     <div className="search-card" onClick={setCurrentChosenCard}>
