@@ -1,5 +1,10 @@
 import { CardCommonAttributes } from "../types/searchTypes";
-import { CardMetaData, StringObj } from "../types/utils";
+import {
+  CardMetaData,
+  StringObj,
+  CardWithNames,
+  CardsComparison,
+} from "../types/utils";
 
 export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
   if (cardsCollection) {
@@ -12,7 +17,9 @@ export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
   return null;
 };
 
-export const replaceIdWithName = (card: CardCommonAttributes | null) => {
+export const replaceIdWithName = (
+  card: CardCommonAttributes | null
+): CardWithNames | void => {
   const cardTypes: CardMetaData = {
     3: "Hero",
     4: "Minion",
@@ -107,8 +114,13 @@ export const replaceIdWithName = (card: CardCommonAttributes | null) => {
       card.cardType = name;
     }
   }
-
-  return card;
+  const newCard: CardWithNames = {
+    manaCost: card.manaCost,
+    className: card.class,
+    cardSet: card.cardSet,
+    cardType: card.cardType,
+  };
+  return newCard;
 };
 
 // const iterateAndSwapIdToName = (
@@ -128,3 +140,49 @@ export const replaceIdWithName = (card: CardCommonAttributes | null) => {
 //     }
 //   }
 // };
+
+export const compareCardAttributes = (
+  correctCard: CardWithNames | null,
+  chosenCard: CardWithNames | null
+) => {
+  let cardsComparisonOutcome: CardsComparison = {
+    class: false,
+    type: false,
+    manaCost: "lower",
+    set: false,
+  };
+
+  if (!correctCard || !chosenCard) {
+    return;
+  }
+
+  const comparisonMapping = {
+    className: "class",
+    cardType: "type",
+    manaCost: "manaCost",
+    cardSet: "set",
+  };
+
+  for (const [cardProp, outcomeProp] of Object.entries(comparisonMapping)) {
+    const correctValue = correctCard[cardProp as keyof CardWithNames];
+    const chosenValue = chosenCard[cardProp as keyof CardWithNames];
+
+    if (cardProp === "manaCost") {
+      if (correctValue !== undefined && chosenValue !== undefined) {
+        if (correctValue === chosenValue) {
+          cardsComparisonOutcome.manaCost = true;
+        } else if (correctValue < chosenValue) {
+          cardsComparisonOutcome.manaCost = "lower";
+        } else {
+          cardsComparisonOutcome.manaCost = "higher";
+        }
+      }
+    } else {
+      if (correctValue && chosenValue && correctValue === chosenValue) {
+        cardsComparisonOutcome[outcomeProp as keyof CardsComparison] = true;
+      }
+    }
+  }
+
+  return cardsComparisonOutcome;
+};
