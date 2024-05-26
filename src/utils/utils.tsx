@@ -1,10 +1,5 @@
 import { CardCommonAttributes } from "../types/searchTypes";
-import {
-  CardMetaData,
-  StringObj,
-  CardWithNames,
-  CardsComparison,
-} from "../types/utils";
+import { CardMetaData, CardWithNames, CardsComparison } from "../types/utils";
 
 export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
   if (cardsCollection) {
@@ -19,7 +14,7 @@ export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
 
 export const replaceIdWithName = (
   card: CardCommonAttributes | null
-): CardWithNames | void => {
+): CardWithNames | null => {
   const cardTypes: CardMetaData = {
     3: "Hero",
     4: "Minion",
@@ -97,7 +92,7 @@ export const replaceIdWithName = (
   //TODO make iterateAndSwapIdToName work!
 
   if (!card) {
-    return;
+    return null;
   }
   for (const [id, name] of Object.entries(cardSets)) {
     if (card.cardSetId === parseInt(id)) {

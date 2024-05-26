@@ -1,17 +1,17 @@
 import React from "react";
 import "../ui/grid.scss";
-import { CardCommonAttributes } from "../../types/searchTypes";
+import { CardsComparison } from "../../types/utils";
 
 interface GridCardAttributes {
-  correctCard: CardCommonAttributes | null;
-  choosenCard: CardCommonAttributes | null;
+  cardsComparisonOutcome: CardsComparison | null | undefined;
 }
 
-const Grid = ({ correctCard, choosenCard }: GridCardAttributes) => {
-  if (!choosenCard) {
+const Grid = ({ cardsComparisonOutcome }: GridCardAttributes) => {
+  if (!cardsComparisonOutcome) {
     return null;
   }
   return (
+    //
     <div className="cards-grid-container">
       <div className="card">Example1</div>
       <div className="card">Example2</div>
@@ -19,5 +19,7 @@ const Grid = ({ correctCard, choosenCard }: GridCardAttributes) => {
     </div>
   );
 };
+
+//
 
 export default Grid;
