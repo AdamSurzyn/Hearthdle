@@ -1,18 +1,23 @@
 //TODO Stworzyc faktyczny reducer do grida
 
-import { GameAction, CardPair } from "../types/gameReducerTypes";
+import {
+  GameAction,
+  CardsComparisonArr,
+  GameActionKind,
+} from "../types/gameReducerTypes";
 
-export default function gameReducer(cards: CardPair, action: GameAction) {
+export const initalCardsComparisonState = [];
+
+export function gameReducer(state: CardsComparisonArr, action: GameAction) {
   switch (action.type) {
-    case "WRONG": {
-      return [cards];
+    case GameActionKind.ADD: {
+      return [action.payload, ...state];
     }
-    case "RIGHT": {
-      return [cards];
+    case GameActionKind.RESET: {
+      return [];
     }
     default: {
-      throw Error("??");
+      throw Error("Wrong or no action chosen in gameReducer!");
     }
   }
 }
-//Mana, Class, Type

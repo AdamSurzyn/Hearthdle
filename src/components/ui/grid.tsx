@@ -1,21 +1,26 @@
 import React from "react";
 import "../ui/grid.scss";
-import { CardsComparison } from "../../types/utils";
+import { CardsComparisonArr } from "../../types/gameReducerTypes";
 
 interface GridCardAttributes {
-  cardsComparisonOutcome: CardsComparison | null | undefined;
+  cardsComparisonArr: CardsComparisonArr;
 }
 
-const Grid = ({ cardsComparisonOutcome }: GridCardAttributes) => {
-  if (!cardsComparisonOutcome) {
+const Grid: React.FC<GridCardAttributes> = ({ cardsComparisonArr }) => {
+  if (!cardsComparisonArr) {
     return null;
   }
+  //!Musze tu wrzucic wlasciwe nazwy, a nie tylko, czy jest to true, false etc.
   return (
-    //
     <div className="cards-grid-container">
-      <div className="card">Example1</div>
-      <div className="card">Example2</div>
-      <div className="card">Example3</div>
+      {cardsComparisonArr.map((card, id) => (
+        <div className="card-comparison" key={id}>
+          <div className="card-prop">{card.class}</div>
+          <div className="card-prop">{card.manaCost}</div>
+          <div className="card-prop">{card.set}</div>
+          <div className="card-prop">{card.type}</div>
+        </div>
+      ))}
     </div>
   );
 };

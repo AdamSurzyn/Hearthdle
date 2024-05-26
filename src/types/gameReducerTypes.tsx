@@ -1,16 +1,13 @@
-import { CardWithNames } from "./utils";
+import { CardsComparison } from "./utils";
 
 export enum GameActionKind {
-  WRONG = "WRONG",
-  RIGHT = "RIGHT",
+  ADD = "ADD",
+  RESET = "RESET",
 }
 
 export interface GameAction {
   type: GameActionKind;
-  payload: CardPair;
+  payload: CardsComparison;
 }
 
-export interface CardPair {
-  wrongCard: CardWithNames;
-  rightCard: CardWithNames;
-}
+export type CardsComparisonArr = CardsComparison[];

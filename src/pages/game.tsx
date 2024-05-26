@@ -4,11 +4,19 @@ import "../pages/game.scss";
 import { CardsQueryData } from "../types/searchTypes";
 import { useQuery } from "react-query";
 import { getAllCards } from "../features/getCards";
-import { pickRandomCard, replaceIdWithName } from "../utils/utils";
+import {
+  compareCardAttributes,
+  pickRandomCard,
+  replaceIdWithName,
+} from "../utils/utils";
 import { useChosenCardContext } from "../contexts/CardsContext";
+import { useCardsComparisonContext } from "../contexts/GameStateContext";
+import { useEffect } from "react";
+import { GameActionKind } from "../types/gameReducerTypes";
 
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
+  const { cardsComparisonOutcomeArr, dispatch } = useCardsComparisonContext();
   const {
     error,
     data: cards,
@@ -18,15 +26,26 @@ const Game = () => {
     queryFn: getAllCards,
   });
 
+  useEffect(() => {
+    if (!cards || !currentChosenCard) return;
+
+    const randomCard = pickRandomCard(cards.cards);
+    //Replaces id's with names according to metadata
+    const newRandomCard = replaceIdWithName(randomCard);
+    const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
+    const cardsComparisonOutcome = compareCardAttributes(
+      newRandomCard,
+      newChosenCard
+    );
+    if (cardsComparisonOutcome) {
+      dispatch({ type: GameActionKind.ADD, payload: cardsComparisonOutcome });
+    }
+  }, [currentChosenCard, dispatch, cards]);
+
   if (error) {
     return <div>An error occured : {error.message}</div>;
   }
 
-  const randomCard = pickRandomCard(cards?.cards);
-  //Replaces id's with names according to metadata
-  replaceIdWithName(randomCard);
-  replaceIdWithName(currentChosenCard.choosenCard);
-  console.log(randomCard);
   return (
     <div className="container">
       {isLoading ? (
@@ -39,10 +58,7 @@ const Game = () => {
       ) : (
         <Search />
       )}
-      <Grid
-        correctCard={randomCard}
-        choosenCard={currentChosenCard.choosenCard}
-      />
+      <Grid cardsComparisonArr={cardsComparisonOutcomeArr} />
     </div>
   );
 };
