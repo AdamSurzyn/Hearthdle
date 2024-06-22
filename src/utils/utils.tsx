@@ -2,19 +2,16 @@ import { CardCommonAttributes } from "../types/searchTypes";
 import { CardMetaData, CardWithNames, CardsComparison } from "../types/utils";
 
 export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
-  if (cardsCollection) {
-    const CardsCollectionLength = cardsCollection.length;
-    const randomCardsCollectionIndex = Math.floor(
-      Math.random() * CardsCollectionLength
-    );
-    return cardsCollection[randomCardsCollectionIndex];
-  }
-  return null;
+  const CardsCollectionLength = cardsCollection.length;
+  const randomCardsCollectionIndex = Math.floor(
+    Math.random() * CardsCollectionLength
+  );
+  return cardsCollection[randomCardsCollectionIndex];
 };
 
 export const replaceIdWithName = (
-  card: CardCommonAttributes | null
-): CardWithNames | null => {
+  card: CardCommonAttributes
+): CardWithNames => {
   const cardTypes: CardMetaData = {
     3: "Hero",
     4: "Minion",
@@ -81,19 +78,6 @@ export const replaceIdWithName = (
     12: "Neutral",
   };
 
-  //Change type
-  // ! iterateAndSwapIdToName(cardTypes, card, "cardTypeId", "cardType");
-
-  //Change class
-  // ! iterateAndSwapIdToName(cardClasses, card, "classId", "class");
-
-  //Change set
-  // ! iterateAndSwapIdToName(cardSets, card, "cardSetId", "cardSet");
-  //TODO make iterateAndSwapIdToName work!
-
-  if (!card) {
-    return null;
-  }
   for (const [id, name] of Object.entries(cardSets)) {
     if (card.cardSetId === parseInt(id)) {
       card.cardSet = name;
@@ -137,8 +121,8 @@ export const replaceIdWithName = (
 // };
 
 export const compareCardAttributes = (
-  correctCard: CardWithNames | null,
-  chosenCard: CardWithNames | null
+  correctCard: CardWithNames,
+  chosenCard: CardWithNames
 ) => {
   let cardsComparisonOutcome: CardsComparison = {
     class: false,

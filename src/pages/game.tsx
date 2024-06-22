@@ -3,7 +3,7 @@ import Grid from "../components/ui/grid";
 import "../pages/game.scss";
 import { CardsQueryData } from "../types/searchTypes";
 import { useQuery } from "react-query";
-import { getAllCards } from "../features/getCards";
+import { getAllCards } from "../api/getCards";
 import {
   compareCardAttributes,
   pickRandomCard,
@@ -17,19 +17,15 @@ import { GameActionKind } from "../types/gameReducerTypes";
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
   const { cardsComparisonOutcomeArr, dispatch } = useCardsComparisonContext();
-  const {
-    error,
-    data: cards,
-    isLoading,
-  } = useQuery<CardsQueryData, Error>({
+  const { error, data, isLoading } = useQuery<CardsQueryData, Error>({
     queryKey: ["cardsQuery"],
     queryFn: getAllCards,
   });
 
   useEffect(() => {
-    if (!cards || !currentChosenCard) return;
+    if (!data || !currentChosenCard.choosenCard) return;
 
-    const randomCard = pickRandomCard(cards.cards);
+    const randomCard = pickRandomCard(data.cards);
     //Replaces id's with names according to metadata
     const newRandomCard = replaceIdWithName(randomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
@@ -40,7 +36,7 @@ const Game = () => {
     if (cardsComparisonOutcome) {
       dispatch({ type: GameActionKind.ADD, payload: cardsComparisonOutcome });
     }
-  }, [currentChosenCard, dispatch, cards]);
+  }, [currentChosenCard, dispatch, data]);
 
   if (error) {
     return <div>An error occured : {error.message}</div>;

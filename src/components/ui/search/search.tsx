@@ -5,16 +5,12 @@ import Scroll from "./scroll";
 import SearchList from "./searchList";
 import { CardsQueryData } from "../../../types/searchTypes";
 import { useQuery } from "react-query";
-import { getAllCards } from "../../../features/getCards";
+import { getAllCards } from "../../../api/getCards";
 const Search = () => {
-  let typingTimer: NodeJS.Timeout | undefined;
+  let typingTimer: NodeJS.Timeout;
   const [searchField, setSearchField] = useState("");
 
-  const {
-    error,
-    data: cards,
-    isLoading,
-  } = useQuery<CardsQueryData, Error>({
+  const { error, data, isLoading } = useQuery<CardsQueryData, Error>({
     queryKey: ["cardsQuery"],
     queryFn: getAllCards,
   });
@@ -27,7 +23,7 @@ const Search = () => {
     return <div>An error occured : {error.message}</div>;
   }
 
-  const filteredCards = cards?.cards.filter((card: CardCommonAttributes) => {
+  const filteredCards = data?.cards.filter((card: CardCommonAttributes) => {
     return card.name.toLowerCase().includes(searchField);
   });
   //Waits 400ms to search after input
@@ -48,7 +44,7 @@ const Search = () => {
           onChange={handleSearchInputChange}
           placeholder="What card?"
         ></input>
-        {searchField && cards?.cards !== undefined && (
+        {searchField && data?.cards !== undefined && (
           <Scroll>
             <SearchList filteredCards={filteredCards}></SearchList>
           </Scroll>
