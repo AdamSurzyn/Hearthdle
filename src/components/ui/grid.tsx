@@ -6,7 +6,11 @@ interface GridCardAttributes {
   cardsComparisonArr: CardsComparisonArr;
 }
 
-const Grid: React.FC<GridCardAttributes> = ({ cardsComparisonArr }) => {
+const Grid = ({
+  cardsComparisonArr,
+}: {
+  cardsComparisonArr: CardsComparisonArr;
+}) => {
   if (!cardsComparisonArr) {
     return null;
   }
