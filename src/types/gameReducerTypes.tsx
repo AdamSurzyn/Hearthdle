@@ -1,4 +1,4 @@
-import { CardsComparison } from "./utils";
+import { CardsComparisonAndNames } from "./utils";
 
 export enum GameActionKind {
   ADD = "ADD",
@@ -7,7 +7,7 @@ export enum GameActionKind {
 
 export interface GameAction {
   type: GameActionKind;
-  payload: CardsComparison;
+  payload: CardsComparisonAndNames;
 }
 
-export type CardsComparisonArr = CardsComparison[];
+export type CardsComparisonAndNamesArr = CardsComparisonAndNames[];

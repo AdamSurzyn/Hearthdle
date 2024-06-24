@@ -1,5 +1,10 @@
 import { CardCommonAttributes } from "../types/searchTypes";
-import { CardMetaData, CardWithNames, CardsComparison } from "../types/utils";
+import {
+  CardMetaData,
+  CardWithNames,
+  CardsComparison,
+  CardsComparisonAndNames,
+} from "../types/utils";
 
 export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
   const CardsCollectionLength = cardsCollection.length;
@@ -78,27 +83,17 @@ export const replaceIdWithName = (
     12: "Neutral",
   };
 
-  for (const [id, name] of Object.entries(cardSets)) {
-    if (card.cardSetId === parseInt(id)) {
-      card.cardSet = name;
-    }
-  }
-  for (const [id, name] of Object.entries(cardClasses)) {
-    if (card.classId === parseInt(id)) {
-      card.class = name;
-    }
-  }
-  for (const [id, name] of Object.entries(cardTypes)) {
-    if (card.cardTypeId === parseInt(id)) {
-      card.cardType = name;
-    }
-  }
+  const mapIdToName = (id: number, metaData: CardMetaData): string => {
+    return metaData[id]!;
+  };
+
   const newCard: CardWithNames = {
     manaCost: card.manaCost,
-    className: card.class,
-    cardSet: card.cardSet,
-    cardType: card.cardType,
+    className: mapIdToName(card.classId, cardClasses),
+    cardSet: mapIdToName(card.cardSetId, cardSets),
+    cardType: mapIdToName(card.cardTypeId, cardTypes),
   };
+
   return newCard;
 };
 
@@ -125,10 +120,10 @@ export const compareCardAttributes = (
   chosenCard: CardWithNames
 ) => {
   let cardsComparisonOutcome: CardsComparison = {
-    class: false,
-    type: false,
-    manaCost: "lower",
-    set: false,
+    classCorrect: false,
+    typeCorrect: false,
+    manaCostCorrect: "lower",
+    setCorrect: false,
   };
 
   if (!correctCard || !chosenCard) {
@@ -149,11 +144,11 @@ export const compareCardAttributes = (
     if (cardProp === "manaCost") {
       if (correctValue !== undefined && chosenValue !== undefined) {
         if (correctValue === chosenValue) {
-          cardsComparisonOutcome.manaCost = true;
+          cardsComparisonOutcome.manaCostCorrect = true;
         } else if (correctValue < chosenValue) {
-          cardsComparisonOutcome.manaCost = "lower";
+          cardsComparisonOutcome.manaCostCorrect = "lower";
         } else {
-          cardsComparisonOutcome.manaCost = "higher";
+          cardsComparisonOutcome.manaCostCorrect = "higher";
         }
       }
     } else {
@@ -162,6 +157,9 @@ export const compareCardAttributes = (
       }
     }
   }
-
-  return cardsComparisonOutcome;
+  const cardsComparisonAndNames: CardsComparisonAndNames = {
+    ...cardsComparisonOutcome,
+    ...chosenCard,
+  };
+  return cardsComparisonAndNames;
 };

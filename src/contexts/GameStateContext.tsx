@@ -1,12 +1,15 @@
 import { Dispatch, createContext, useContext, useReducer } from "react";
-import { CardsComparisonArr, GameAction } from "../types/gameReducerTypes";
+import {
+  CardsComparisonAndNamesArr,
+  GameAction,
+} from "../types/gameReducerTypes";
 import {
   gameReducer,
   initalCardsComparisonState,
 } from "../reducers/gameReducers";
 
 type CardsComparisonContextType = {
-  cardsComparisonOutcomeArr: CardsComparisonArr;
+  cardsComparisonOutcomeArr: CardsComparisonAndNamesArr;
   dispatch: Dispatch<GameAction>;
 };
 

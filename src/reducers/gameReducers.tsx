@@ -2,13 +2,16 @@
 
 import {
   GameAction,
-  CardsComparisonArr,
+  CardsComparisonAndNamesArr,
   GameActionKind,
 } from "../types/gameReducerTypes";
 
 export const initalCardsComparisonState = [];
 
-export function gameReducer(state: CardsComparisonArr, action: GameAction) {
+export function gameReducer(
+  state: CardsComparisonAndNamesArr,
+  action: GameAction
+) {
   switch (action.type) {
     case GameActionKind.ADD: {
       return [action.payload, ...state];

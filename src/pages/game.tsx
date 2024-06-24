@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { GameActionKind } from "../types/gameReducerTypes";
 
 const Game = () => {
+  //! Wymienic kontekst useChosenCardContext na state? Propsy przechodzilyby przez komponenty search => searchList => searchCard. Wiem, ze praktyka mowi, zeby trzymac sie max dwoch komponentow glebokosci.
   const currentChosenCard = useChosenCardContext();
   const { cardsComparisonOutcomeArr, dispatch } = useCardsComparisonContext();
   const { error, data, isLoading } = useQuery<CardsQueryData, Error>({

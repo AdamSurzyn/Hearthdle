@@ -1,17 +1,19 @@
-export interface CardMetaData {
-  [key: string]: string;
-}
+export type CardMetaData = Record<number, string>;
 
 export interface CardWithNames {
-  manaCost?: number;
-  className?: string;
-  cardSet?: string;
-  cardType?: string;
+  manaCost: number;
+  className: string;
+  cardSet: string;
+  cardType: string;
 }
 
 export interface CardsComparison {
-  class?: boolean;
-  type?: boolean;
-  manaCost?: "higher" | "lower" | true;
-  set?: boolean;
+  classCorrect: boolean;
+  typeCorrect: boolean;
+  manaCostCorrect: "higher" | "lower" | true;
+  setCorrect: boolean;
 }
+
+export interface CardsComparisonAndNames
+  extends CardWithNames,
+    CardsComparison {}

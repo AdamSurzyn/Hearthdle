@@ -1,7 +1,7 @@
 export interface CardCommonAttributes {
   artistName: string;
   cardSetId: number;
-  cardTypeId: number | string;
+  cardTypeId: number;
   classId: number;
   collectible: number;
   cropImage: string;
