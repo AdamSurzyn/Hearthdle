@@ -22,27 +22,31 @@ const Game = () => {
     queryKey: ["cardsQuery"],
     queryFn: getAllCards,
   });
-
+  //! UseState to get random card out of the useEffect...
   useEffect(() => {
-    if (!data || !currentChosenCard.choosenCard) return;
+    if (!data || !data.cards || !currentChosenCard.choosenCard) return;
 
     const randomCard = pickRandomCard(data.cards);
-    //Replaces id's with names according to metadata
+
+    // Replace id's with names according to metadata
     const newRandomCard = replaceIdWithName(randomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
+
+    console.log(newRandomCard, "I'm the random card");
+
     const cardsComparisonOutcome = compareCardAttributes(
       newRandomCard,
       newChosenCard
     );
+
     if (cardsComparisonOutcome) {
       dispatch({ type: GameActionKind.ADD, payload: cardsComparisonOutcome });
     }
-  }, [currentChosenCard, dispatch, data]);
+  }, [currentChosenCard, data, dispatch]);
 
   if (error) {
     return <div>An error occured : {error.message}</div>;
   }
-
   return (
     <div className="container">
       {isLoading ? (

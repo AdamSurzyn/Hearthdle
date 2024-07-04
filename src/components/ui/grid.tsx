@@ -10,15 +10,28 @@ const Grid = ({
     return null;
   }
   console.log(cardsComparisonArr);
-  //!Musze tu wrzucic wlasciwe nazwy, a nie tylko, czy jest to true, false etc.
+  const getClassName = (value: boolean) => {
+    let className = "card-prop";
+
+    if (value) {
+      className += "-right";
+    } else {
+      className += "-wrong";
+    }
+
+    return className;
+  };
+
   return (
     <div className="cards-grid-container">
       {cardsComparisonArr.map((card, id) => (
         <div className="card-comparison" key={id}>
-          <div className="card-prop">{card.className}</div>
+          <div className={getClassName(card.classCorrect)}>
+            {card.className}
+          </div>
           <div className="card-prop">{card.manaCostCorrect.toString()}</div>
-          <div className="card-prop">{card.cardSet}</div>
-          <div className="card-prop">{card.cardType}</div>
+          <div className={getClassName(card.setCorrect)}>{card.cardSet}</div>
+          <div className={getClassName(card.typeCorrect)}>{card.cardType}</div>
         </div>
       ))}
     </div>
