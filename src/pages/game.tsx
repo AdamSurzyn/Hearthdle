@@ -1,7 +1,7 @@
 import Search from "../components/ui/search/search";
 import Grid from "../components/ui/grid";
 import "../pages/game.scss";
-import { CardsQueryData } from "../types/searchTypes";
+import { CardCommonAttributes, CardsQueryData } from "../types/searchTypes";
 import { useQuery } from "react-query";
 import { getAllCards } from "../api/getCards";
 import {
@@ -11,25 +11,36 @@ import {
 } from "../utils/utils";
 import { useChosenCardContext } from "../contexts/CardsContext";
 import { useCardsComparisonContext } from "../contexts/GameStateContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GameActionKind } from "../types/gameReducerTypes";
 
 const Game = () => {
-  //! Wymienic kontekst useChosenCardContext na state? Propsy przechodzilyby przez komponenty search => searchList => searchCard. Wiem, ze praktyka mowi, zeby trzymac sie max dwoch komponentow glebokosci.
   const currentChosenCard = useChosenCardContext();
   const { cardsComparisonOutcomeArr, dispatch } = useCardsComparisonContext();
   const { error, data, isLoading } = useQuery<CardsQueryData, Error>({
     queryKey: ["cardsQuery"],
     queryFn: getAllCards,
   });
-  //! UseState to get random card out of the useEffect...
-  useEffect(() => {
-    if (!data || !data.cards || !currentChosenCard.choosenCard) return;
 
+  const [randomCard, setRandomCard] = useState<CardCommonAttributes | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
     const randomCard = pickRandomCard(data.cards);
+    setRandomCard(randomCard);
+  }, [data]);
+
+  useEffect(() => {
+    if (!currentChosenCard.choosenCard || !randomCard) return;
+
+    const newRandomCard = replaceIdWithName(randomCard);
 
     // Replace id's with names according to metadata
-    const newRandomCard = replaceIdWithName(randomCard);
+
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
 
     console.log(newRandomCard, "I'm the random card");
@@ -42,7 +53,7 @@ const Game = () => {
     if (cardsComparisonOutcome) {
       dispatch({ type: GameActionKind.ADD, payload: cardsComparisonOutcome });
     }
-  }, [currentChosenCard, data, dispatch]);
+  }, [currentChosenCard, data, dispatch, randomCard]);
 
   if (error) {
     return <div>An error occured : {error.message}</div>;

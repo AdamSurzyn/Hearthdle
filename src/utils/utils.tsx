@@ -5,7 +5,7 @@ import {
   CardsComparison,
   CardsComparisonAndNames,
 } from "../types/utils";
-import { cardClassesMeta, cardSetsMeta, cardTypesMeta } from "./cardData";
+import { cardSetsMeta, cardTypesMeta, cardClassesMeta } from "./cardData";
 
 export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
   const CardsCollectionLength = cardsCollection.length;
@@ -40,47 +40,38 @@ export const compareCardAttributes = (
   correctCard: CardWithNames,
   chosenCard: CardWithNames
 ) => {
-  let cardsComparisonOutcome: CardsComparison = {
-    classCorrect: false,
-    typeCorrect: false,
-    manaCostCorrect: "lower",
-    setCorrect: false,
-  };
-
   if (!correctCard || !chosenCard) {
     return;
   }
 
-  const comparisonMapping = {
-    className: "class",
-    cardType: "type",
-    manaCost: "manaCost",
-    cardSet: "set",
+  const cardsComparisonOutcome: CardsComparison = {
+    classCorrect: correctCard.className === chosenCard.className,
+    typeCorrect: correctCard.cardType === chosenCard.cardType,
+    manaCostCorrect: compareManaCost(correctCard.manaCost, chosenCard.manaCost),
+    setCorrect: correctCard.cardSet === chosenCard.cardSet,
   };
 
-  for (const [cardProp, outcomeProp] of Object.entries(comparisonMapping)) {
-    const correctValue = correctCard[cardProp as keyof CardWithNames];
-    const chosenValue = chosenCard[cardProp as keyof CardWithNames];
-
-    if (cardProp === "manaCost") {
-      if (correctValue !== undefined && chosenValue !== undefined) {
-        if (correctValue === chosenValue) {
-          cardsComparisonOutcome.manaCostCorrect = true;
-        } else if (correctValue < chosenValue) {
-          cardsComparisonOutcome.manaCostCorrect = "lower";
-        } else {
-          cardsComparisonOutcome.manaCostCorrect = "higher";
-        }
-      }
-    } else {
-      if (correctValue && chosenValue && correctValue === chosenValue) {
-        cardsComparisonOutcome[outcomeProp as keyof CardsComparison] = true;
-      }
-    }
-  }
   const cardsComparisonAndNames: CardsComparisonAndNames = {
     ...cardsComparisonOutcome,
     ...chosenCard,
   };
+
   return cardsComparisonAndNames;
+};
+
+const compareManaCost = (
+  correctCost?: number,
+  chosenCost?: number
+): "lower" | "higher" | true => {
+  if (correctCost === undefined || chosenCost === undefined) {
+    return "lower";
+  }
+
+  if (correctCost === chosenCost) {
+    return true;
+  } else if (correctCost < chosenCost) {
+    return "lower";
+  } else {
+    return "higher";
+  }
 };
