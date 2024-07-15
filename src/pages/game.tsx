@@ -39,11 +39,7 @@ const Game = () => {
 
     const newRandomCard = replaceIdWithName(randomCard);
 
-    // Replace id's with names according to metadata
-
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
-
-    console.log(newRandomCard, "I'm the random card");
 
     const cardsComparisonOutcome = compareCardAttributes(
       newRandomCard,
@@ -63,8 +59,8 @@ const Game = () => {
       {isLoading ? (
         <div className="spinner-container">
           <div className="spinner">
-            <div></div>
-            <div></div>
+            <div className="circle"></div>
+            <div className="circle"></div>
           </div>
         </div>
       ) : (

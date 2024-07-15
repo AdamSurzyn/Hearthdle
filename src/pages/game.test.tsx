@@ -13,7 +13,6 @@ describe("Game", () => {
   });
 });
 
-//! Test mi zwraca :'No QueryClient set, use QueryClientProvider to set one' przy linijce 14 komponentu 'Game'.
 //TODO 1) sprawdzic, czy renderuja sie search i grid
 //TODO 2) sprawdzic, czy randomCard zwraca pojedyncza karte
 //TODO 3) sprobowac wywolac error przy braniu danych przez api i sprawdzic, czy dobrze zareaguje
