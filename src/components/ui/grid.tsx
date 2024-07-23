@@ -9,28 +9,43 @@ const Grid = ({
   if (!cardsComparisonArr) {
     return null;
   }
-  const getClassName = (value: boolean) => {
+  const getCardClassName = (isCardPropertyCorrect: boolean) => {
     let className = "card-prop";
 
-    if (value) {
-      className += "-right";
-    } else {
-      className += "-wrong";
+    if (isCardPropertyCorrect) {
+      return (className += "-right");
     }
+    return (className += "-wrong");
+  };
 
-    return className;
+  const getManaIndicator = (manaProp: "higher" | "lower" | true) => {
+    console.log(manaProp);
+    let manaClass = "card-prop";
+
+    if (manaProp === "higher") {
+      return (manaClass += "-mana-up");
+    } else if (manaProp === "lower") {
+      return (manaClass += "-mana-down");
+    }
+    return "card-prop-right";
   };
 
   return (
     <div className="cards-grid-container">
       {cardsComparisonArr.map((card, id) => (
         <div className="card-comparison" key={id}>
-          <div className={getClassName(card.classCorrect)}>
+          <div className={getCardClassName(card.classCorrect)}>
             {card.className}
           </div>
-          <div className="card-prop">{card.manaCostCorrect.toString()}</div>
-          <div className={getClassName(card.setCorrect)}>{card.cardSet}</div>
-          <div className={getClassName(card.typeCorrect)}>{card.cardType}</div>
+          <div className={getManaIndicator(card.manaCostCorrect)}>
+            {card.manaCost.toString()}
+          </div>
+          <div className={getCardClassName(card.setCorrect)}>
+            {card.cardSet}
+          </div>
+          <div className={getCardClassName(card.typeCorrect)}>
+            {card.cardType}
+          </div>
         </div>
       ))}
     </div>
