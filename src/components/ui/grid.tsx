@@ -9,7 +9,6 @@ const Grid = ({
   if (!cardsComparisonArr) {
     return null;
   }
-  console.log(cardsComparisonArr);
   const getClassName = (value: boolean) => {
     let className = "card-prop";
 
