@@ -18,19 +18,15 @@ export const pickRandomCard = (cardsCollection: CardCommonAttributes[]) => {
 export const replaceIdWithName = (
   card: CardCommonAttributes
 ): CardWithNames => {
-  const cardTypes = cardTypesMeta;
-  const cardSets = cardSetsMeta;
-  const cardClasses = cardClassesMeta;
-
   const mapIdToName = (id: number, metaData: CardMetaData): string => {
     return metaData[id]!;
   };
 
   const newCard: CardWithNames = {
     manaCost: card.manaCost,
-    className: mapIdToName(card.classId, cardClasses),
-    cardSet: mapIdToName(card.cardSetId, cardSets),
-    cardType: mapIdToName(card.cardTypeId, cardTypes),
+    className: mapIdToName(card.classId, cardClassesMeta),
+    cardSet: mapIdToName(card.cardSetId, cardSetsMeta),
+    cardType: mapIdToName(card.cardTypeId, cardTypesMeta),
   };
 
   return newCard;
@@ -60,15 +56,15 @@ export const compareCardAttributes = (
 };
 
 const compareManaCost = (
-  correctCost?: number,
-  chosenCost?: number
-): "lower" | "higher" | true => {
+  correctCost: number,
+  chosenCost: number
+): "lower" | "higher" | "equal" => {
   if (correctCost === undefined || chosenCost === undefined) {
     return "lower";
   }
 
   if (correctCost === chosenCost) {
-    return true;
+    return "equal";
   } else if (correctCost < chosenCost) {
     return "lower";
   } else {
