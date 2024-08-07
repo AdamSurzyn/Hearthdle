@@ -23,6 +23,7 @@ export const replaceIdWithName = (
   };
 
   const newCard: CardWithNames = {
+    name: card.name,
     manaCost: card.manaCost,
     className: mapIdToName(card.classId, cardClassesMeta),
     cardSet: mapIdToName(card.cardSetId, cardSetsMeta),
@@ -41,6 +42,7 @@ export const compareCardAttributes = (
   }
 
   const cardsComparisonOutcome: CardsComparison = {
+    cardNameCorrect: correctCard.name === chosenCard.name,
     classCorrect: correctCard.className === chosenCard.className,
     typeCorrect: correctCard.cardType === chosenCard.cardType,
     manaCostCorrect: compareManaCost(correctCard.manaCost, chosenCard.manaCost),

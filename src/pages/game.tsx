@@ -38,7 +38,7 @@ const Game = () => {
     if (!currentChosenCard.choosenCard || !randomCard) return;
 
     const newRandomCard = replaceIdWithName(randomCard);
-
+    console.log(newRandomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
 
     const cardsComparisonOutcome = compareCardAttributes(
@@ -48,6 +48,12 @@ const Game = () => {
 
     if (cardsComparisonOutcome) {
       dispatch({ type: GameActionKind.ADD, payload: cardsComparisonOutcome });
+    }
+    if (cardsComparisonOutcome?.cardNameCorrect) {
+      dispatch({
+        type: GameActionKind.RESET,
+        payload: cardsComparisonOutcome,
+      });
     }
   }, [currentChosenCard, data, dispatch, randomCard]);
 

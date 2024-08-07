@@ -1,6 +1,7 @@
 export type CardMetaData = Record<number, string>;
 
 export interface CardWithNames {
+  name: string;
   manaCost: number;
   className: string;
   cardSet: string;
@@ -8,6 +9,7 @@ export interface CardWithNames {
 }
 
 export interface CardsComparison {
+  cardNameCorrect: boolean;
   classCorrect: boolean;
   typeCorrect: boolean;
   manaCostCorrect: "higher" | "lower" | "equal";
