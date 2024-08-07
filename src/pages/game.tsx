@@ -13,6 +13,7 @@ import { useChosenCardContext } from "../contexts/CardsContext";
 import { useCardsComparisonContext } from "../contexts/GameStateContext";
 import { useEffect, useState } from "react";
 import { GameActionKind } from "../types/gameReducerTypes";
+import { ReplayButton } from "../components/ui/replayButton";
 
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
@@ -25,20 +26,20 @@ const Game = () => {
   const [randomCard, setRandomCard] = useState<CardCommonAttributes | null>(
     null
   );
+  const [isReplay, setIsReplay] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!data) {
+    if (!data || isReplay) {
       return;
     }
     const randomCard = pickRandomCard(data.cards);
     setRandomCard(randomCard);
-  }, [data]);
+  }, [data, isReplay]);
 
   useEffect(() => {
     if (!currentChosenCard.choosenCard || !randomCard) return;
 
     const newRandomCard = replaceIdWithName(randomCard);
-    console.log(newRandomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
 
     const cardsComparisonOutcome = compareCardAttributes(
@@ -46,16 +47,20 @@ const Game = () => {
       newChosenCard
     );
 
-    if (cardsComparisonOutcome) {
-      dispatch({ type: GameActionKind.ADD, payload: cardsComparisonOutcome });
-    }
+    console.log(newRandomCard);
     if (cardsComparisonOutcome?.cardNameCorrect) {
       dispatch({
         type: GameActionKind.RESET,
         payload: cardsComparisonOutcome,
       });
+      setIsReplay(true);
+    } else if (cardsComparisonOutcome) {
+      dispatch({
+        type: GameActionKind.ADD,
+        payload: cardsComparisonOutcome,
+      });
     }
-  }, [currentChosenCard, data, dispatch, randomCard]);
+  }, [currentChosenCard, data, dispatch]); //! Czemu mi podpowiada, zebym dodal random card do tablicy zaleznosci, jesli logicznie to nie ma sensu?
 
   if (error) {
     return <div>An error occured : {error.message}</div>;
@@ -73,6 +78,9 @@ const Game = () => {
         <Search />
       )}
       <Grid cardsComparisonArr={cardsComparisonOutcomeArr} />
+      {isReplay && (
+        <ReplayButton isReplay={isReplay} setIsReplay={setIsReplay} />
+      )}
     </div>
   );
 };
