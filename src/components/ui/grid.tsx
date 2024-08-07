@@ -12,7 +12,7 @@ const Grid = ({
   const getCardClassName = (isCardPropertyCorrect: boolean) =>
     isCardPropertyCorrect ? "card-prop-right" : "card-prop-wrong";
 
-  const getManaIndicator = (manaProp: "higher" | "lower" | true) => {
+  const getManaIndicator = (manaProp: "higher" | "lower" | "equal") => {
     let manaClass = "card-prop";
 
     if (manaProp === "higher") {
@@ -31,7 +31,7 @@ const Grid = ({
             {card.className}
           </div>
           <div className={getManaIndicator(card.manaCostCorrect)}>
-            {card.manaCost.toString()}
+            {card.manaCost}
           </div>
           <div className={getCardClassName(card.setCorrect)}>
             {card.cardSet}

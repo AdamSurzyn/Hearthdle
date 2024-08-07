@@ -10,7 +10,7 @@ export interface CardWithNames {
 export interface CardsComparison {
   classCorrect: boolean;
   typeCorrect: boolean;
-  manaCostCorrect: "higher" | "lower" | true;
+  manaCostCorrect: "higher" | "lower" | "equal";
   setCorrect: boolean;
 }
 
