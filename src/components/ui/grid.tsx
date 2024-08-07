@@ -9,17 +9,10 @@ const Grid = ({
   if (!cardsComparisonArr) {
     return null;
   }
-  const getCardClassName = (isCardPropertyCorrect: boolean) => {
-    let className = "card-prop";
-
-    if (isCardPropertyCorrect) {
-      return (className += "-right");
-    }
-    return (className += "-wrong");
-  };
+  const getCardClassName = (isCardPropertyCorrect: boolean) =>
+    isCardPropertyCorrect ? "card-prop-right" : "card-prop-wrong";
 
   const getManaIndicator = (manaProp: "higher" | "lower" | true) => {
-    console.log(manaProp);
     let manaClass = "card-prop";
 
     if (manaProp === "higher") {
@@ -29,7 +22,7 @@ const Grid = ({
     }
     return "card-prop-right";
   };
-
+  //! I will want to check if the game has ended after everything here is already rendered.
   return (
     <div className="cards-grid-container">
       {cardsComparisonArr.map((card, id) => (
