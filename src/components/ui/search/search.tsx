@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../ui/search/search.scss";
 import { CardCommonAttributes } from "../../../types/searchTypes";
 import Scroll from "./scroll";
@@ -8,12 +8,29 @@ import { useQuery } from "react-query";
 import { getAllCards } from "../../../api/getCards";
 const Search = () => {
   let typingTimer: NodeJS.Timeout;
+  const handleClickOutside = (event: MouseEvent): void => {
+    if (
+      searchRef.current &&
+      !searchRef.current.contains(event.target as Node)
+    ) {
+      setShowResults(false);
+    }
+  };
   const [searchField, setSearchField] = useState("");
 
   const { error, data, isLoading } = useQuery<CardsQueryData, Error>({
     queryKey: ["cardsQuery"],
     queryFn: getAllCards,
   });
+  const searchRef = useRef<HTMLDivElement | null>(null);
+  const [showResults, setShowResults] = useState<boolean>(false);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   if (isLoading) {
     return <div className="card-search-container">Loading...</div>;
@@ -34,17 +51,18 @@ const Search = () => {
     typingTimer = setTimeout(() => {
       setSearchField(inputValue);
     }, 400);
+    setShowResults(true);
   };
   return (
     <div className="card-search-container">
-      <div className="card-search-list-container">
+      <div ref={searchRef} className="card-search-list-container">
         <input
           className="card-search"
           type="search"
           onChange={handleSearchInputChange}
           placeholder="What card?"
         ></input>
-        {searchField && data?.cards !== undefined && (
+        {showResults && searchField && data?.cards !== undefined && (
           <Scroll>
             <SearchList filteredCards={filteredCards}></SearchList>
           </Scroll>
