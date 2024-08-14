@@ -1,5 +1,5 @@
 import "../ui/grid.scss";
-import { CardsComparisonAndNamesArr } from "../../types/gameReducerTypes";
+import { CardsComparisonAndNamesArr } from "../../types/gameStateContextTypes";
 
 const Grid = ({
   cardsComparisonArr,
