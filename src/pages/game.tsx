@@ -12,12 +12,15 @@ import {
 import { useChosenCardContext } from "../contexts/CardsContext";
 import { useCardsComparisonContext } from "../contexts/GameStateContext";
 import { useEffect, useState } from "react";
-import { GameActionKind } from "../types/gameReducerTypes";
 import { ReplayButton } from "../components/ui/replayButton";
 
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
-  const { cardsComparisonOutcomeArr, dispatch } = useCardsComparisonContext();
+  const {
+    cardsComparisonOutcomeArr,
+    addToCardsComparisonOutcomeArr,
+    clearCardsComparisonOutcomeArr,
+  } = useCardsComparisonContext();
   const { error, data, isLoading } = useQuery<CardsQueryData, Error>({
     queryKey: ["cardsQuery"],
     queryFn: getAllCards,
@@ -46,21 +49,16 @@ const Game = () => {
       newRandomCard,
       newChosenCard
     );
-
+    //Logika : jezeli nazwa karty jest ta sama: win, jezeli outcome istnieje: dodaj go do arrayu outcome
     console.log(newRandomCard);
+    console.log(cardsComparisonOutcome);
     if (cardsComparisonOutcome?.cardNameCorrect) {
-      dispatch({
-        type: GameActionKind.RESET,
-        payload: cardsComparisonOutcome,
-      });
+      clearCardsComparisonOutcomeArr();
       setIsReplay(true);
     } else if (cardsComparisonOutcome) {
-      dispatch({
-        type: GameActionKind.ADD,
-        payload: cardsComparisonOutcome,
-      });
+      addToCardsComparisonOutcomeArr(cardsComparisonOutcome);
     }
-  }, [currentChosenCard, data, dispatch]); //! Czemu mi podpowiada, zebym dodal random card do tablicy zaleznosci, jesli logicznie to nie ma sensu?
+  }, [currentChosenCard, data]); //! Czemu mi podpowiada, zebym dodal random card do tablicy zaleznosci, jesli logicznie to nie ma sensu?
 
   if (error) {
     return <div>An error occured : {error.message}</div>;

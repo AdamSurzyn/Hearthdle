@@ -1,16 +1,10 @@
-import { Dispatch, createContext, useContext, useReducer } from "react";
-import {
-  CardsComparisonAndNamesArr,
-  GameAction,
-} from "../types/gameReducerTypes";
-import {
-  gameReducer,
-  initalCardsComparisonState,
-} from "../reducers/gameReducers";
-
+import { createContext, useContext, useState } from "react";
+import { CardsComparisonAndNamesArr } from "../types/gameReducerTypes";
+import { CardsComparisonAndNames } from "../types/utils";
 type CardsComparisonContextType = {
   cardsComparisonOutcomeArr: CardsComparisonAndNamesArr;
-  dispatch: Dispatch<GameAction>;
+  addToCardsComparisonOutcomeArr: (card: CardsComparisonAndNames) => void;
+  clearCardsComparisonOutcomeArr: () => void;
 };
 
 const CardsComparisonContext = createContext<CardsComparisonContextType | null>(
@@ -22,14 +16,23 @@ export const CardsComparisonProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [cardsComparisonOutcomeArr, dispatch] = useReducer(
-    gameReducer,
-    initalCardsComparisonState
-  );
+  const [cardsComparisonOutcomeArr, setCardsComparisonOutcomeArr] =
+    useState<CardsComparisonAndNamesArr>([]);
+
+  const addToCardsComparisonOutcomeArr = (card: CardsComparisonAndNames) => {
+    setCardsComparisonOutcomeArr((prevArr) => [...prevArr, card]);
+  };
+  const clearCardsComparisonOutcomeArr = () => {
+    setCardsComparisonOutcomeArr([]);
+  };
 
   return (
     <CardsComparisonContext.Provider
-      value={{ cardsComparisonOutcomeArr, dispatch }}
+      value={{
+        cardsComparisonOutcomeArr,
+        addToCardsComparisonOutcomeArr,
+        clearCardsComparisonOutcomeArr,
+      }}
     >
       {children}
     </CardsComparisonContext.Provider>
