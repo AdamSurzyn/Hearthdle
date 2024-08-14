@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { CardsComparisonAndNamesArr } from "../types/gameReducerTypes";
+import { CardsComparisonAndNamesArr } from "../types/gameStateContextTypes";
 import { CardsComparisonAndNames } from "../types/utils";
 type CardsComparisonContextType = {
   cardsComparisonOutcomeArr: CardsComparisonAndNamesArr;
