@@ -1,28 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../ui/search/search.scss";
-import { CardCommonAttributes } from "./searchTypes";
+import { CardCommonAttributes } from "../../../types/searchTypes";
 import Scroll from "./scroll";
 import SearchList from "./searchList";
-import { CardsQueryData } from "./searchTypes";
+import { CardsQueryData } from "../../../types/searchTypes";
 import { useQuery } from "react-query";
-import { allCards } from "../../../features/getCards";
+import { getAllCards } from "../../../api/getCards";
 const Search = () => {
-  let typingTimer: NodeJS.Timeout | undefined;
-  const [searchField, setSearchField] = useState("");
-  const useQueryCards = () => {
-    const {
-      error,
-      data: cards,
-      isLoading,
-    } = useQuery<CardsQueryData, Error>({
-      queryKey: ["cardsQuery"],
-      queryFn: allCards,
-    });
-
-    return { cards, isLoading, error };
+  let typingTimer: NodeJS.Timeout;
+  const handleClickOutside = (event: MouseEvent): void => {
+    if (
+      searchRef.current &&
+      !searchRef.current.contains(event.target as Node)
+    ) {
+      setShowResults(false);
+    }
   };
+  const [searchField, setSearchField] = useState("");
 
-  const { cards, isLoading, error } = useQueryCards();
+  const { error, data, isLoading } = useQuery<CardsQueryData, Error>({
+    queryKey: ["cardsQuery"],
+    queryFn: getAllCards,
+  });
+  const searchRef = useRef<HTMLDivElement | null>(null);
+  const [showResults, setShowResults] = useState<boolean>(false);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   if (isLoading) {
     return <div className="card-search-container">Loading...</div>;
@@ -32,9 +40,10 @@ const Search = () => {
     return <div>An error occured : {error.message}</div>;
   }
 
-  const filteredCards = cards?.cards.filter((card: CardCommonAttributes) => {
-    return card.name.toLowerCase().includes(searchField);
+  const filteredCards = data?.cards.filter((card: CardCommonAttributes) => {
+    return card.name.toLowerCase().includes(searchField.toLowerCase());
   });
+  //Waits 400ms to search after input
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(typingTimer);
     const inputValue = e.target.value;
@@ -42,17 +51,18 @@ const Search = () => {
     typingTimer = setTimeout(() => {
       setSearchField(inputValue);
     }, 400);
+    setShowResults(true);
   };
   return (
     <div className="card-search-container">
-      <div className="card-search-list-container">
+      <div ref={searchRef} className="card-search-list-container">
         <input
           className="card-search"
           type="search"
           onChange={handleSearchInputChange}
           placeholder="What card?"
         ></input>
-        {searchField && cards?.cards !== undefined && (
+        {showResults && searchField && data?.cards !== undefined && (
           <Scroll>
             <SearchList filteredCards={filteredCards}></SearchList>
           </Scroll>
