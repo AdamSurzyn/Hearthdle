@@ -1,20 +1,21 @@
-import Search from "../components/ui/search/search";
-import Grid from "../components/ui/grid";
-import "../pages/game.scss";
-import { CardCommonAttributes, CardsQueryData } from "../types/searchTypes";
+import Search from "../../../components/ui/search/search";
+import Grid from "../../../components/ui/grid";
+import { CardCommonAttributes, CardsQueryData } from "../../../types/searchTypes";
 import { useQuery } from "react-query";
-import { getAllCards } from "../api/getCards";
+import { getAllCards } from "../../../api/getCards";
 import {
   compareCardAttributes,
   pickRandomCard,
   replaceIdWithName,
-} from "../utils/utils";
-import { useChosenCardContext } from "../contexts/CardsContext";
-import { useCardsComparisonContext } from "../contexts/GameStateContext";
+} from "../../../utils/utils";
+import { useChosenCardContext } from "../../../contexts/CardsContext";
+import { useCardsComparisonContext } from "../../../contexts/GameStateContext";
 import { useEffect, useState } from "react";
-import { ReplayButton } from "../components/ui/replayButton";
+import { ReplayButton } from "../../../components/ui/replayButton";
 
-const Game = () => {
+import "./hearthdle.scss";
+
+const Hearthdle = () => {
   const currentChosenCard = useChosenCardContext();
   const {
     cardsComparisonOutcomeArr,
@@ -83,4 +84,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default Hearthdle;

@@ -3,33 +3,30 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Game from "./pages/game";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ChosenCardProvider } from "./contexts/CardsContext";
-import { CardsComparisonProvider } from "./contexts/GameStateContext";
+import Game from "./pages/game/game";
+import Hearthdle from "./pages/game/hearthdle/heartdleWithContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-const GameWithContext = () => {
-  return (
-    <CardsComparisonProvider>
-      <ChosenCardProvider>
-        <Game />
-      </ChosenCardProvider>
-    </CardsComparisonProvider>
-  );
-};
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
   },
+ 
   {
-    path: "/hearthdleGame",
-    element: <GameWithContext />,
-  },
+    path: "/game",
+    element: <Game />,
+    children:[
+      {
+        path: "/game/hearthdle",
+        element: <Hearthdle />,
+      },
+    ]
+  }
 ]);
 const blizzardQueryClient = new QueryClient({
   defaultOptions: {

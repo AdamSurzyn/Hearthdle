@@ -1,12 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Game from "./game";
+import Hearthdle from "./hearthdle";
 
 // Czy to powinno byc rozszerzenie .tsx? Z ts mi nie dziala.
 
 describe("Game", () => {
   it("Gets a random card, and shows grid and search bar", () => {
-    render(<Game />);
+    render(<Hearthdle />);
 
     const search = screen.getByRole("textbox");
     const grid = screen.getByRole("grid");
