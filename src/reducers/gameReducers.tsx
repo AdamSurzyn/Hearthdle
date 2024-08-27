@@ -1,5 +1,3 @@
-//TODO Stworzyc faktyczny reducer do grida
-
 import {
   GameAction,
   GameStateType,
@@ -34,14 +32,3 @@ export function gameReducer(state: GameStateType, action: GameAction) {
     }
   }
 }
-
-/*
-  Miec tutaj trzy stany gry.
-  
-  PreStart
-  During
-  End
-
-  Zmieniac te stany w zaleznosci od tego co sie dzieje
-  I przy zmianie stanu triggerowac rzeczy: np modale, ui elementy, theme, animacje, w/e
-*/
