@@ -1,51 +1,42 @@
 import { createContext, useContext, useState } from "react";
-import { CardsComparisonAndNamesArr } from "../types/gameStateContextTypes";
-import { CardsComparisonAndNames } from "../types/utils";
-type CardsComparisonContextType = {
-  cardsComparisonOutcomeArr: CardsComparisonAndNamesArr;
-  addToCardsComparisonOutcomeArr: (card: CardsComparisonAndNames) => void;
-  clearCardsComparisonOutcomeArr: () => void;
+import { UserGuessArr } from "../types/gameStateContextTypes";
+import { UserGuess } from "../types/utils";
+type GameContextType = {
+  userGuessArr: UserGuessArr;
+  addToUserGuessArr: (card: UserGuess) => void;
+  clearUserGuessArr: () => void;
 };
 
-const CardsComparisonContext = createContext<CardsComparisonContextType | null>(
-  null
-);
+const GameContext = createContext<GameContextType | null>(null);
 
-export const CardsComparisonProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [cardsComparisonOutcomeArr, setCardsComparisonOutcomeArr] =
-    useState<CardsComparisonAndNamesArr>([]);
+export const GameProvider = ({ children }: { children: React.ReactNode }) => {
+  const [userGuessArr, setUserGuessArr] = useState<UserGuessArr>([]);
 
-  const addToCardsComparisonOutcomeArr = (card: CardsComparisonAndNames) => {
-    setCardsComparisonOutcomeArr((prevArr) => [...prevArr, card]);
+  const addToUserGuessArr = (card: UserGuess) => {
+    setUserGuessArr((prevArr) => [...prevArr, card]);
   };
-  const clearCardsComparisonOutcomeArr = () => {
-    setCardsComparisonOutcomeArr([]);
+  const clearUserGuessArr = () => {
+    setUserGuessArr([]);
   };
 
   return (
-    <CardsComparisonContext.Provider
+    <GameContext.Provider
       value={{
-        cardsComparisonOutcomeArr,
-        addToCardsComparisonOutcomeArr,
-        clearCardsComparisonOutcomeArr,
+        userGuessArr,
+        addToUserGuessArr,
+        clearUserGuessArr,
       }}
     >
       {children}
-    </CardsComparisonContext.Provider>
+    </GameContext.Provider>
   );
 };
 
-export const useCardsComparisonContext = () => {
-  const ctx = useContext(CardsComparisonContext);
+export const useGameContext = () => {
+  const ctx = useContext(GameContext);
 
   if (!ctx) {
-    throw Error(
-      "Missing CardsComparisonContext, it's not wrapped in the provider"
-    );
+    throw Error("Missing UserGuessContext, it's not wrapped in the provider");
   }
 
   return ctx;

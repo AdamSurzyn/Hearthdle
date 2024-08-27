@@ -1,3 +1,3 @@
-import { CardsComparisonAndNames } from "./utils";
+import { UserGuess } from "./utils";
 
-export type CardsComparisonAndNamesArr = CardsComparisonAndNames[];
+export type UserGuessArr = UserGuess[];
