@@ -9,7 +9,11 @@ type GameContextType = {
 
 const GameContext = createContext<GameContextType | null>(null);
 
-export const GameProvider = ({ children }: { children: React.ReactNode }) => {
+export const GameContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [userGuessArr, setUserGuessArr] = useState<UserGuessArr>([]);
 
   const addToUserGuessArr = (card: UserGuess) => {

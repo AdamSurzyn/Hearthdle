@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useUnclick } from "../../hooks/unclick";
 import "../../ui/search/search.scss";
 import { CardCommonAttributes } from "../../../types/searchTypes";
 import Scroll from "./scroll";
@@ -8,14 +9,7 @@ import { useQuery } from "react-query";
 import { getAllCards } from "../../../api/getCards";
 const Search = () => {
   let typingTimer: NodeJS.Timeout;
-  const handleClickOutside = (event: MouseEvent): void => {
-    if (
-      searchRef.current &&
-      !searchRef.current.contains(event.target as Node)
-    ) {
-      setShowResults(false);
-    }
-  };
+
   const [searchField, setSearchField] = useState("");
 
   const { error, data, isLoading } = useQuery<CardsQueryData, Error>({
@@ -23,15 +17,7 @@ const Search = () => {
     queryFn: getAllCards,
   });
   const searchRef = useRef<HTMLDivElement | null>(null);
-  const [showResults, setShowResults] = useState<boolean>(false);
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
+  const { showResults, setShowResults } = useUnclick(searchRef);
   if (isLoading) {
     return <div className="card-search-container">Loading...</div>;
   }

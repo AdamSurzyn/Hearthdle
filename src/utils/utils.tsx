@@ -3,7 +3,7 @@ import {
   CardMetaData,
   CardWithNames,
   CardsComparison,
-  CardsComparisonAndNames,
+  UserGuess,
 } from "../types/utils";
 import { cardSetsMeta, cardTypesMeta, cardClassesMeta } from "./cardData";
 
@@ -49,7 +49,7 @@ export const compareCardAttributes = (
     setCorrect: correctCard.cardSet === chosenCard.cardSet,
   };
 
-  const cardsComparisonAndNames: CardsComparisonAndNames = {
+  const cardsComparisonAndNames: UserGuess = {
     ...cardsComparisonOutcome,
     ...chosenCard,
   };
