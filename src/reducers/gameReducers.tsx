@@ -10,16 +10,19 @@ export const initialGameState: GameStateType = {
   guesses: 0,
 };
 
-export function gameReducer(state: GameStateType, action: GameAction) {
+export function gameReducer(
+  state: GameStateType,
+  action: GameAction
+): GameStateType {
   switch (action.type) {
     case GameActionKind.START_GAME: {
       return { ...state, gameState: "During" };
     }
     case GameActionKind.END_GAME: {
-      return { ...state, gamState: "End" };
+      return { ...state, gameState: "End" };
     }
     case GameActionKind.RESET_GAME: {
-      return { ...state, gameState: "preStart", score: 0 };
+      return { ...state, gameState: "preStart", score: 0, guesses: 0 };
     }
     case GameActionKind.ADD_SCORE: {
       return { ...state, score: state.score + action.payload.score };

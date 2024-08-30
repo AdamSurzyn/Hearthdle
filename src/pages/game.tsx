@@ -11,9 +11,21 @@ import {
 } from "../utils/utils";
 import { useChosenCardContext } from "../contexts/CardsContext";
 import { useGameContext } from "../contexts/GameStateContext";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { ReplayButton } from "../components/ui/replayButton";
-
+import { gameReducer, initialGameState } from "../reducers/gameReducers";
+import {
+  GameAction,
+  GameActionKind,
+  GameStateType,
+} from "../types/gameReducerTypes";
+import {
+  startGame,
+  endGame,
+  resetGame,
+  addGuess,
+  addScore,
+} from "../reducers/gameActions";
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
   const { userGuessArr, addToUserGuessArr, clearUserGuessArr } =
@@ -23,17 +35,23 @@ const Game = () => {
     queryFn: getAllCards,
   });
 
+  const [currentGameState, gameDispatch] = useReducer(
+    gameReducer,
+    initialGameState
+  );
+
   const [randomCard, setRandomCard] = useState<CardCommonAttributes | null>(
     null
   );
   const [isReplay, setIsReplay] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!data || isReplay) {
+    if (!data || currentGameState.gameState === "During") {
       return;
     }
     const randomCard = pickRandomCard(data.cards);
     setRandomCard(randomCard);
+    startGame(gameDispatch);
   }, [data, isReplay]);
 
   useEffect(() => {
@@ -41,7 +59,7 @@ const Game = () => {
 
     const newRandomCard = replaceIdWithName(randomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
-
+    addGuess(gameDispatch, 1);
     const cardsComparisonOutcome = compareCardAttributes(
       newRandomCard,
       newChosenCard
@@ -49,6 +67,7 @@ const Game = () => {
     if (cardsComparisonOutcome?.cardNameCorrect) {
       clearUserGuessArr();
       setIsReplay(true);
+      endGame(gameDispatch);
     } else if (cardsComparisonOutcome) {
       addToUserGuessArr(cardsComparisonOutcome);
     }
@@ -70,9 +89,7 @@ const Game = () => {
         <Search />
       )}
       <Grid cardsComparisonArr={userGuessArr} />
-      {isReplay && (
-        <ReplayButton isReplay={isReplay} setIsReplay={setIsReplay} />
-      )}
+      {isReplay && <ReplayButton onReset={resetGame} />}
     </div>
   );
 };
