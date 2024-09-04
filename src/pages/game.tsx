@@ -40,6 +40,26 @@ const Game = () => {
     initialGameState
   );
 
+  const startGame = () => {
+    gameDispatch({ type: GameActionKind.START_GAME });
+  };
+
+  const endGame = () => {
+    gameDispatch({ type: GameActionKind.END_GAME });
+  };
+
+  const resetGame = () => {
+    gameDispatch({ type: GameActionKind.RESET_GAME });
+  };
+
+  const addScore = (score: number) => {
+    gameDispatch({ type: GameActionKind.ADD_SCORE, payload: { score } });
+  };
+
+  const addGuess = (guesses: number) => {
+    gameDispatch({ type: GameActionKind.ADD_GUESS, payload: { guesses } });
+  };
+  //TODO Move above to a separate folder.
   const [randomCard, setRandomCard] = useState<CardCommonAttributes | null>(
     null
   );
@@ -51,7 +71,7 @@ const Game = () => {
     }
     const randomCard = pickRandomCard(data.cards);
     setRandomCard(randomCard);
-    startGame(gameDispatch);
+    startGame();
   }, [data, isReplay]);
 
   useEffect(() => {
@@ -59,7 +79,7 @@ const Game = () => {
 
     const newRandomCard = replaceIdWithName(randomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
-    addGuess(gameDispatch, 1);
+    addGuess(1);
     const cardsComparisonOutcome = compareCardAttributes(
       newRandomCard,
       newChosenCard
@@ -67,7 +87,7 @@ const Game = () => {
     if (cardsComparisonOutcome?.cardNameCorrect) {
       clearUserGuessArr();
       setIsReplay(true);
-      endGame(gameDispatch);
+      endGame();
     } else if (cardsComparisonOutcome) {
       addToUserGuessArr(cardsComparisonOutcome);
     }
