@@ -63,21 +63,21 @@ const Game = () => {
   const [randomCard, setRandomCard] = useState<CardCommonAttributes | null>(
     null
   );
-  const [isReplay, setIsReplay] = useState<boolean>(false);
-
+  console.log(currentGameState);
   useEffect(() => {
-    if (!data || currentGameState.gameState === "During") {
+    if (!data || currentGameState.gameState !== "preStart") {
       return;
     }
     const randomCard = pickRandomCard(data.cards);
     setRandomCard(randomCard);
     startGame();
-  }, [data, isReplay]);
+  }, [data, currentGameState]);
 
   useEffect(() => {
     if (!currentChosenCard.choosenCard || !randomCard) return;
 
     const newRandomCard = replaceIdWithName(randomCard);
+    console.log(randomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
     addGuess(1);
     const cardsComparisonOutcome = compareCardAttributes(
@@ -86,7 +86,6 @@ const Game = () => {
     );
     if (cardsComparisonOutcome?.cardNameCorrect) {
       clearUserGuessArr();
-      setIsReplay(true);
       endGame();
     } else if (cardsComparisonOutcome) {
       addToUserGuessArr(cardsComparisonOutcome);
@@ -109,7 +108,9 @@ const Game = () => {
         <Search />
       )}
       <Grid cardsComparisonArr={userGuessArr} />
-      {isReplay && <ReplayButton onReset={resetGame} />}
+      {currentGameState.gameState === "End" && (
+        <ReplayButton onReset={resetGame} />
+      )}
     </div>
   );
 };
