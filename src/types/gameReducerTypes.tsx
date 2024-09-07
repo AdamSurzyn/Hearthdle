@@ -18,4 +18,5 @@ export interface GameStateType {
   gameState: GameState;
   score: number;
   guesses: number;
+  totalGuesses: number;
 }

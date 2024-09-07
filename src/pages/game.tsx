@@ -19,13 +19,6 @@ import {
   GameActionKind,
   GameStateType,
 } from "../types/gameReducerTypes";
-import {
-  startGame,
-  endGame,
-  resetGame,
-  addGuess,
-  addScore,
-} from "../reducers/gameActions";
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
   const { userGuessArr, addToUserGuessArr, clearUserGuessArr } =

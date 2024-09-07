@@ -8,6 +8,7 @@ export const initialGameState: GameStateType = {
   gameState: "preStart",
   score: 0,
   guesses: 0,
+  totalGuesses: 0,
 };
 
 export function gameReducer(
@@ -28,7 +29,7 @@ export function gameReducer(
       return { ...state, score: state.score + action.payload.score };
     }
     case GameActionKind.ADD_GUESS: {
-      return { ...state, guesses: state.guesses + action.payload.guesses };
+      return { ...state, guesses: state.guesses + action.payload.guesses, totalGuesses: state.totalGuesses + action.payload.guesses };
     }
     default: {
       throw Error("Wrong or no action chosen in gameReducer!");
