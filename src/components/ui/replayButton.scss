@@ -1,0 +1,103 @@
+.replay-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.replay-button,
+.replay-button *,
+.replay-button :after,
+.replay-button :before,
+.replay-button:after,
+.replay-button:before {
+    border: 0 solid #cc8100;;
+    box-sizing: border-box;
+}
+
+.replay-button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: button;
+    background-color: #2f3640;
+    background-image: none;
+    color: #dac9a1;
+    cursor: pointer;
+    letter-spacing: 2px;
+    font-size: larger;
+    margin: 0;
+    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.replay-button:disabled {
+    cursor: default;
+}
+
+.replay-button:-moz-focusring {
+    outline: auto;
+}
+
+.replay-button svg {
+    display: block;
+    vertical-align: middle;
+}
+
+.replay-button [hidden] {
+    display: none;
+}
+
+.replay-button {
+    border-radius: 5px;
+    border-width: 3px;
+    overflow: hidden;
+    padding: 0.8rem 3rem;
+    position: relative;
+}
+
+.replay-button span {
+    mix-blend-mode: difference;
+    position: relative;
+    z-index: 1;
+}
+
+.replay-button:after,
+.replay-button:before {
+    background: #000000;
+    -webkit-clip-path: polygon(0 0,
+            100% 0,
+            100% calc(var(--progress, 0%) / 2),
+            0 calc(var(--progress, 0%) / 2),
+            0 0,
+            0 calc(100% - var(--progress, 0%) / 2),
+            100% calc(100% - var(--progress, 0%) / 2),
+            100% 100%,
+        
+            0 100%,
+            0 calc(100% - var(--progress, 0%) / 2));
+    clip-path: polygon(0 0,
+            100% 0,
+            100% calc(var(--progress, 0%) / 2),
+            0 calc(var(--progress, 0%) / 2),
+            0 0,
+            0 calc(100% - var(--progress, 0%) / 2),
+            100% calc(100% - var(--progress, 0%) / 2),
+            100% 100%,
+            0 100%,
+            0 calc(100% - var(--progress, 0%) / 2));
+    content: "";
+    inset: 0;
+    position: absolute;
+    transform: translateX(calc(100% - var(--progress, 0%) / 1.99));
+    transition: transform 0.2s ease, -webkit-clip-path 0.2s ease;
+    transition: clip-path 0.2s ease, transform 0.2s ease;
+    transition: clip-path 0.2s ease, transform 0.2s ease,
+        -webkit-clip-path 0.2s ease;
+}
+
+.replay-button:after {
+    transform: translateX(calc(-100% + var(--progress, 0%) / 1.99));
+}
+
+.replay-button:hover {
+    --progress: 100%;
+}
