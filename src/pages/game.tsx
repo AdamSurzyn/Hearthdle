@@ -79,6 +79,7 @@ const Game = () => {
     );
     if (cardsComparisonOutcome?.cardNameCorrect) {
       clearUserGuessArr();
+      addScore(1);
       endGame();
     } else if (cardsComparisonOutcome) {
       addToUserGuessArr(cardsComparisonOutcome);
