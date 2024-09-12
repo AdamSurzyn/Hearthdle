@@ -12,13 +12,14 @@ import {
 import { useChosenCardContext } from "../contexts/CardsContext";
 import { useGameContext } from "../contexts/GameStateContext";
 import { useEffect, useReducer, useState } from "react";
-import { ReplayButton } from "../components/ui/replayButton";
+import { ReplayButton } from "../components/ui/replayModal/replayButton";
 import { gameReducer, initialGameState } from "../reducers/gameReducers";
 import {
   GameAction,
   GameActionKind,
   GameStateType,
 } from "../types/gameReducerTypes";
+import { ReplayModal } from "../components/ui/replayModal/replayModal";
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
   const { userGuessArr, addToUserGuessArr, clearUserGuessArr } =
@@ -102,8 +103,9 @@ const Game = () => {
         <Search />
       )}
       <Grid cardsComparisonArr={userGuessArr} />
+
       {currentGameState.gameState === "End" && (
-        <ReplayButton onReset={resetGame} />
+        <ReplayModal onReset={resetGame}></ReplayModal>
       )}
     </div>
   );

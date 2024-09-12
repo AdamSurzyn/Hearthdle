@@ -1,9 +1,7 @@
 import React from "react";
 import "./replayButton.scss";
+import { ReplayButtonProps } from "../../../types/modalTypes";
 // Define the props type for the component
-interface ReplayButtonProps {
-  onReset: () => void;
-}
 
 // Create the functional component with props type
 export const ReplayButton: React.FC<ReplayButtonProps> = ({ onReset }) => {
