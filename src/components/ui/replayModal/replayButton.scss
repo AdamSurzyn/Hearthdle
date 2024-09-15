@@ -1,16 +1,10 @@
-.replay-button-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .replay-button,
 .replay-button *,
 .replay-button :after,
 .replay-button :before,
 .replay-button:after,
 .replay-button:before {
-    border: 0 solid #cc8100;;
+    border: 0 solid;
     box-sizing: border-box;
 }
 
@@ -19,14 +13,13 @@
     -webkit-appearance: button;
     background-color: #2f3640;
     background-image: none;
-    color: #dac9a1;
+    color: #fff;
     cursor: pointer;
-    letter-spacing: 2px;
-    font-size: larger;
+    font-size: 100%;
+    line-height: 1.5;
     margin: 0;
     -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
     padding: 0;
-    text-transform: uppercase;
 }
 
 .replay-button:disabled {
@@ -47,57 +40,89 @@
 }
 
 .replay-button {
-    border-radius: 5px;
-    border-width: 3px;
-    overflow: hidden;
-    padding: 0.8rem 3rem;
+    background: none;
+    box-sizing: border-box;
+    color: #dac9a1;
+    display: block;
+    font-weight: 900;
+    -webkit-mask-image: none;
+    padding: 1.5rem 4rem;
     position: relative;
+    text-transform: uppercase;
 }
 
 .replay-button span {
-    mix-blend-mode: difference;
-    position: relative;
-    z-index: 1;
-}
-
-.replay-button:after,
-.replay-button:before {
-    background: #000000;
-    -webkit-clip-path: polygon(0 0,
-            100% 0,
-            100% calc(var(--progress, 0%) / 2),
-            0 calc(var(--progress, 0%) / 2),
-            0 0,
-            0 calc(100% - var(--progress, 0%) / 2),
-            100% calc(100% - var(--progress, 0%) / 2),
-            100% 100%,
-        
-            0 100%,
-            0 calc(100% - var(--progress, 0%) / 2));
-    clip-path: polygon(0 0,
-            100% 0,
-            100% calc(var(--progress, 0%) / 2),
-            0 calc(var(--progress, 0%) / 2),
-            0 0,
-            0 calc(100% - var(--progress, 0%) / 2),
-            100% calc(100% - var(--progress, 0%) / 2),
-            100% 100%,
-            0 100%,
-            0 calc(100% - var(--progress, 0%) / 2));
-    content: "";
+    background: #2f3640;
+    border: 3px solid #cc8100;
+    border-radius: 999px;
+    display: grid;
     inset: 0;
+    place-items: center;
+    pointer-events: none;
     position: absolute;
-    transform: translateX(calc(100% - var(--progress, 0%) / 1.99));
-    transition: transform 0.2s ease, -webkit-clip-path 0.2s ease;
-    transition: clip-path 0.2s ease, transform 0.2s ease;
-    transition: clip-path 0.2s ease, transform 0.2s ease,
-        -webkit-clip-path 0.2s ease;
 }
 
-.replay-button:after {
-    transform: translateX(calc(-100% + var(--progress, 0%) / 1.99));
+.replay-button:hover span {
+    -webkit-animation: rubberBand 0.8s;
+    animation: rubberBand 0.8s;
 }
 
-.replay-button:hover {
-    --progress: 100%;
+@-webkit-keyframes rubberBand {
+    0% {
+        transform: scaleX(1);
+    }
+
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    75% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes rubberBand {
+    0% {
+        transform: scaleX(1);
+    }
+
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    75% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
 }
