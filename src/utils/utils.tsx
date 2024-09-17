@@ -73,3 +73,7 @@ const compareManaCost = (
     return "higher";
   }
 };
+
+export const calculatePercentOfWins = (wins: number, games: number): number => {
+  return (wins / games) * 100;
+};

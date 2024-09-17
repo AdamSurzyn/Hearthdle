@@ -12,7 +12,6 @@ import {
 import { useChosenCardContext } from "../contexts/CardsContext";
 import { useGameContext } from "../contexts/GameStateContext";
 import { useEffect, useReducer, useState } from "react";
-import { ReplayButton } from "../components/ui/replayModal/replayButton";
 import { gameReducer, initialGameState } from "../reducers/gameReducers";
 import {
   GameAction,
@@ -20,6 +19,7 @@ import {
   GameStateType,
 } from "../types/gameReducerTypes";
 import { ReplayModal } from "../components/ui/replayModal/replayModal";
+
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
   const { userGuessArr, addToUserGuessArr, clearUserGuessArr } =
@@ -57,7 +57,6 @@ const Game = () => {
   const [randomCard, setRandomCard] = useState<CardCommonAttributes | null>(
     null
   );
-  console.log(currentGameState);
   useEffect(() => {
     if (!data || currentGameState.gameState !== "preStart") {
       return;
@@ -105,7 +104,10 @@ const Game = () => {
       <Grid cardsComparisonArr={userGuessArr} />
 
       {currentGameState.gameState === "End" && (
-        <ReplayModal onReset={resetGame}></ReplayModal>
+        <ReplayModal
+          onReset={resetGame}
+          gameState={currentGameState}
+        ></ReplayModal>
       )}
     </div>
   );
