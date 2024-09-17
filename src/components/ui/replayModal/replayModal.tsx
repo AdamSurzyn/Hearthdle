@@ -8,8 +8,8 @@ import { ReplayScore } from "./replayScore";
 export const ReplayModal = ({ onReset, gameState }: ReplayModalProps) => {
   return createPortal(
     <div className="replay-modal">
-      <ReplayButton onReset={onReset}></ReplayButton>
       <ReplayScore gameState={gameState}></ReplayScore>
+      <ReplayButton onReset={onReset}></ReplayButton>
     </div>,
     document.body
   );

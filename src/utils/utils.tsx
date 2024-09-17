@@ -75,5 +75,5 @@ const compareManaCost = (
 };
 
 export const calculatePercentOfWins = (wins: number, games: number): number => {
-  return (wins / games) * 100;
+  return Math.ceil((wins / games) * 100);
 };
