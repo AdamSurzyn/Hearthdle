@@ -7,7 +7,8 @@ import SearchList from "./searchList";
 import { CardsQueryData } from "../../../types/searchTypes";
 import { useQuery } from "react-query";
 import { getAllCards } from "../../../api/getCards";
-const Search = () => {
+import { GameScoreType } from "../../../types/modalTypes";
+const Search = ({ gameState }: GameScoreType) => {
   let typingTimer: NodeJS.Timeout;
 
   const [searchField, setSearchField] = useState("");
@@ -18,6 +19,11 @@ const Search = () => {
   });
   const searchRef = useRef<HTMLDivElement | null>(null);
   const { showResults, setShowResults } = useUnclick(searchRef);
+  useEffect(() => {
+    if (gameState.gameState === "End") {
+      setSearchField("");
+    }
+  }, [gameState.gameState]);
   if (isLoading) {
     return <div className="card-search-container">Loading...</div>;
   }
@@ -29,6 +35,7 @@ const Search = () => {
   const filteredCards = data?.cards.filter((card: CardCommonAttributes) => {
     return card.name.toLowerCase().includes(searchField.toLowerCase());
   });
+
   //Waits 400ms to search after input
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(typingTimer);
@@ -39,6 +46,7 @@ const Search = () => {
     }, 400);
     setShowResults(true);
   };
+
   return (
     <div className="card-search-container">
       <div ref={searchRef} className="card-search-list-container">

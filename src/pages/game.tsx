@@ -99,7 +99,7 @@ const Game = () => {
           </div>
         </div>
       ) : (
-        <Search />
+        <Search gameState={currentGameState} />
       )}
       <Grid cardsComparisonArr={userGuessArr} />
 
