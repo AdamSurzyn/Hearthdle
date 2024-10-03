@@ -48,7 +48,13 @@ const Search = ({ gameState }: GameScoreType) => {
   };
 
   return (
-    <div className="card-search-container">
+    <div
+      className={
+        gameState.gameState !== "End"
+          ? "card-search-container"
+          : "card-search-container-disabled"
+      }
+    >
       <div ref={searchRef} className="card-search-list-container">
         <input
           className="card-search"

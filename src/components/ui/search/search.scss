@@ -3,11 +3,19 @@
     color: #dac9a1;
     border: 3px solid #cc8100;
 }
-
-.card-search-container{
+@mixin center-flex{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.card-search-container{
+    @include center-flex()
+}
+
+.card-search-container-disabled{
+    @include center-flex();
+    pointer-events: none;
+    opacity: 0.6;
 }
 
 .card-search-list-container {
