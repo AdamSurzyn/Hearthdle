@@ -9,10 +9,24 @@ import {
   pickRandomCard,
   replaceIdWithName,
 } from "../utils/utils";
+import {
+  startGame,
+  endGame,
+  addGuess,
+  addScore,
+  resetGame,
+} from "../reducers/gameActions";
 import { useChosenCardContext } from "../contexts/CardsContext";
 import { useGameContext } from "../contexts/GameStateContext";
-import { useEffect, useState } from "react";
-import { ReplayButton } from "../components/ui/replayButton";
+import { useEffect, useReducer, useState } from "react";
+import { gameReducer, initialGameState } from "../reducers/gameReducers";
+import {
+  GameAction,
+  GameActionKind,
+  GameStateType,
+  GameState,
+} from "../types/gameReducerTypes";
+import { ReplayModal } from "../components/ui/replayModal/replayModal";
 
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
@@ -23,32 +37,37 @@ const Game = () => {
     queryFn: getAllCards,
   });
 
+  const [currentGameState, gameDispatch] = useReducer(
+    gameReducer,
+    initialGameState
+  );
+
   const [randomCard, setRandomCard] = useState<CardCommonAttributes | null>(
     null
   );
-  const [isReplay, setIsReplay] = useState<boolean>(false);
-
   useEffect(() => {
-    if (!data || isReplay) {
+    if (!data || currentGameState.gameState !== GameState.Idle) {
       return;
     }
     const randomCard = pickRandomCard(data.cards);
     setRandomCard(randomCard);
-  }, [data, isReplay]);
+    gameDispatch(startGame());
+  }, [data, currentGameState]);
 
   useEffect(() => {
     if (!currentChosenCard.choosenCard || !randomCard) return;
 
     const newRandomCard = replaceIdWithName(randomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
-
+    gameDispatch(addGuess(1));
     const cardsComparisonOutcome = compareCardAttributes(
       newRandomCard,
       newChosenCard
     );
     if (cardsComparisonOutcome?.cardNameCorrect) {
       clearUserGuessArr();
-      setIsReplay(true);
+      gameDispatch(addScore(1));
+      gameDispatch(endGame());
     } else if (cardsComparisonOutcome) {
       addToUserGuessArr(cardsComparisonOutcome);
     }
@@ -67,11 +86,15 @@ const Game = () => {
           </div>
         </div>
       ) : (
-        <Search />
+        <Search gameState={currentGameState} />
       )}
       <Grid cardsComparisonArr={userGuessArr} />
-      {isReplay && (
-        <ReplayButton isReplay={isReplay} setIsReplay={setIsReplay} />
+
+      {currentGameState.gameState === "End" && (
+        <ReplayModal
+          onReset={resetGame}
+          gameState={currentGameState}
+        ></ReplayModal>
       )}
     </div>
   );

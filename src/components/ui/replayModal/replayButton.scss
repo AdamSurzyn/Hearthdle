@@ -1,0 +1,134 @@
+.replay-button,
+.replay-button *,
+.replay-button :after,
+.replay-button :before,
+.replay-button:after,
+.replay-button:before {
+    border: 0 solid;
+    box-sizing: border-box;
+}
+
+.replay-button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: button;
+    background-color: #2f3640;
+    background-image: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 100%;
+    line-height: 1.5;
+    margin: 0 auto;
+    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+    padding: 0;
+}
+
+.replay-button:disabled {
+    cursor: default;
+}
+
+.replay-button:-moz-focusring {
+    outline: auto;
+}
+
+.replay-button svg {
+    display: block;
+    vertical-align: middle;
+}
+
+.replay-button [hidden] {
+    display: none;
+}
+
+.replay-button {
+    background: none;
+    box-sizing: border-box;
+    color: #dac9a1;
+    display: block;
+    font-weight: 900;
+    -webkit-mask-image: none;
+    padding: 1.5rem 4rem;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.replay-button span {
+    background: #2f3640;
+    border: 3px solid #cc8100;
+    border-radius: 999px;
+    display: grid;
+    inset: 0;
+    place-items: center;
+    pointer-events: none;
+    position: absolute;
+}
+
+.replay-button:hover span {
+    -webkit-animation: rubberBand 0.8s;
+    animation: rubberBand 0.8s;
+}
+
+@-webkit-keyframes rubberBand {
+    0% {
+        transform: scaleX(1);
+    }
+
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    75% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes rubberBand {
+    0% {
+        transform: scaleX(1);
+    }
+
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    75% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.replay-button-container{
+
+    grid-row-start: 8;
+
+}

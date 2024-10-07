@@ -3,7 +3,7 @@ export enum GameActionKind {
   END_GAME = "END_GAME",
   RESET_GAME = "RESET_GAME",
   ADD_GUESS = "ADD_GUESS",
-  ADD_SCORE = "ADD_SCORE",
+  INCREMENT_SCORE = "INCREMENT_SCORE",
 }
 
 export enum GameState {
@@ -15,11 +15,12 @@ export type GameAction =
   | { type: typeof GameActionKind.START_GAME }
   | { type: typeof GameActionKind.END_GAME }
   | { type: typeof GameActionKind.RESET_GAME }
-  | { type: typeof GameActionKind.ADD_SCORE; payload: { score: number } }
-  | { type: typeof GameActionKind.ADD_GUESS; payload: { guesses: number } };
+  | { type: typeof GameActionKind.INCREMENT_SCORE; payload?: { score: number } }
+  | { type: typeof GameActionKind.ADD_GUESS; payload?: { guesses: number } };
 
 export interface GameStateType {
   gameState: GameState;
   score: number;
   guesses: number;
+  totalGuesses: number;
 }
