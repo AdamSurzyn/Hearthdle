@@ -6,18 +6,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Game from "./pages/game";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ChosenCardProvider } from "./contexts/CardsContext";
-import { CardsComparisonProvider } from "./contexts/GameStateContext";
+import { GameContextProvider } from "./contexts/GameStateContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 const GameWithContext = () => {
   return (
-    <CardsComparisonProvider>
+    <GameContextProvider>
       <ChosenCardProvider>
         <Game />
       </ChosenCardProvider>
-    </CardsComparisonProvider>
+    </GameContextProvider>
   );
 };
 

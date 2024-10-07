@@ -1,11 +1,7 @@
 import "../ui/grid.scss";
-import { CardsComparisonAndNamesArr } from "../../types/gameStateContextTypes";
+import { UserGuessArr } from "../../types/gameStateContextTypes";
 
-const Grid = ({
-  cardsComparisonArr,
-}: {
-  cardsComparisonArr: CardsComparisonAndNamesArr;
-}) => {
+const Grid = ({ cardsComparisonArr }: { cardsComparisonArr: UserGuessArr }) => {
   if (!cardsComparisonArr) {
     return null;
   }
