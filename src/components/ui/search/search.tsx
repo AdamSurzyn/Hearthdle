@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useUnclick } from "../../hooks/unclick";
+import { useUnclick } from "../../hooks/useUnclick";
 import "../../ui/search/search.scss";
 import { CardCommonAttributes } from "../../../types/searchTypes";
 import Scroll from "./scroll";
@@ -36,14 +36,9 @@ const Search = ({ gameState }: GameScoreType) => {
     return card.name.toLowerCase().includes(searchField.toLowerCase());
   });
 
-  //Waits 400ms to search after input
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearTimeout(typingTimer);
     const inputValue = e.target.value;
-
-    typingTimer = setTimeout(() => {
-      setSearchField(inputValue);
-    }, 400);
+    setSearchField(inputValue);
     setShowResults(true);
   };
 
