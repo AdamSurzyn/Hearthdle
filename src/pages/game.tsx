@@ -9,6 +9,13 @@ import {
   pickRandomCard,
   replaceIdWithName,
 } from "../utils/utils";
+import {
+  startGame,
+  endGame,
+  addGuess,
+  addScore,
+  resetGame,
+} from "../reducers/gameActions";
 import { useChosenCardContext } from "../contexts/CardsContext";
 import { useGameContext } from "../contexts/GameStateContext";
 import { useEffect, useReducer, useState } from "react";
@@ -17,6 +24,7 @@ import {
   GameAction,
   GameActionKind,
   GameStateType,
+  GameState,
 } from "../types/gameReducerTypes";
 import { ReplayModal } from "../components/ui/replayModal/replayModal";
 
@@ -34,57 +42,36 @@ const Game = () => {
     initialGameState
   );
 
-  const startGame = () => {
-    gameDispatch({ type: GameActionKind.START_GAME });
-  };
-
-  const endGame = () => {
-    gameDispatch({ type: GameActionKind.END_GAME });
-  };
-
-  const resetGame = () => {
-    gameDispatch({ type: GameActionKind.RESET_GAME });
-  };
-
-  const addScore = (score: number) => {
-    gameDispatch({ type: GameActionKind.ADD_SCORE, payload: { score } });
-  };
-
-  const addGuess = (guesses: number) => {
-    gameDispatch({ type: GameActionKind.ADD_GUESS, payload: { guesses } });
-  };
-  //TODO Move above to a separate folder.
   const [randomCard, setRandomCard] = useState<CardCommonAttributes | null>(
     null
   );
   useEffect(() => {
-    if (!data || currentGameState.gameState !== "preStart") {
+    if (!data || currentGameState.gameState !== GameState.Idle) {
       return;
     }
     const randomCard = pickRandomCard(data.cards);
     setRandomCard(randomCard);
-    startGame();
+    gameDispatch(startGame());
   }, [data, currentGameState]);
 
   useEffect(() => {
     if (!currentChosenCard.choosenCard || !randomCard) return;
 
     const newRandomCard = replaceIdWithName(randomCard);
-    console.log(randomCard);
     const newChosenCard = replaceIdWithName(currentChosenCard.choosenCard);
-    addGuess(1);
+    gameDispatch(addGuess(1));
     const cardsComparisonOutcome = compareCardAttributes(
       newRandomCard,
       newChosenCard
     );
     if (cardsComparisonOutcome?.cardNameCorrect) {
       clearUserGuessArr();
-      addScore(1);
-      endGame();
+      gameDispatch(addScore(1));
+      gameDispatch(endGame());
     } else if (cardsComparisonOutcome) {
       addToUserGuessArr(cardsComparisonOutcome);
     }
-  }, [currentChosenCard, data]); //! Czemu mi podpowiada, zebym dodal random card do tablicy zaleznosci, jesli logicznie to nie ma sensu?
+  }, [currentChosenCard, data]);
 
   if (error) {
     return <div>An error occured : {error.message}</div>;
