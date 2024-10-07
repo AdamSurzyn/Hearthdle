@@ -52,7 +52,7 @@ const Game = () => {
     } else if (cardsComparisonOutcome) {
       addToUserGuessArr(cardsComparisonOutcome);
     }
-  }, [currentChosenCard, data]); //! Czemu mi podpowiada, zebym dodal random card do tablicy zaleznosci, jesli logicznie to nie ma sensu?
+  }, [currentChosenCard, data]);
 
   if (error) {
     return <div>An error occured : {error.message}</div>;
