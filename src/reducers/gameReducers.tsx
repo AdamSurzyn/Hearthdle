@@ -2,10 +2,11 @@ import {
   GameAction,
   GameStateType,
   GameActionKind,
+  GameState,
 } from "../types/gameReducerTypes";
 
 export const initialGameState: GameStateType = {
-  gameState: "preStart",
+  gameState: GameState.Idle,
   score: 0,
   guesses: 0,
 };
@@ -19,7 +20,7 @@ export function gameReducer(state: GameStateType, action: GameAction) {
       return { ...state, gamState: "End" };
     }
     case GameActionKind.RESET_GAME: {
-      return { ...state, gameState: "preStart", score: 0 };
+      return { ...state, gameState: "Idle", score: 0 };
     }
     case GameActionKind.ADD_SCORE: {
       return { ...state, score: state.score + action.payload.score };

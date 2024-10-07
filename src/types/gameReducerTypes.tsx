@@ -6,7 +6,11 @@ export enum GameActionKind {
   ADD_SCORE = "ADD_SCORE",
 }
 
-type GameState = "preStart" | "During" | "End";
+export enum GameState {
+  Idle = "Idle",
+  During = "During",
+  End = "End",
+}
 export type GameAction =
   | { type: typeof GameActionKind.START_GAME }
   | { type: typeof GameActionKind.END_GAME }
