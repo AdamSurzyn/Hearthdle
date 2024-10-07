@@ -1,23 +1,32 @@
-//TODO Stworzyc faktyczny reducer do grida
-
 import {
   GameAction,
-  CardsComparisonAndNamesArr,
+  GameStateType,
   GameActionKind,
+  GameState,
 } from "../types/gameReducerTypes";
 
-export const initalCardsComparisonState = [];
+export const initialGameState: GameStateType = {
+  gameState: GameState.Idle,
+  score: 0,
+  guesses: 0,
+};
 
-export function gameReducer(
-  state: CardsComparisonAndNamesArr,
-  action: GameAction
-) {
+export function gameReducer(state: GameStateType, action: GameAction) {
   switch (action.type) {
-    case GameActionKind.ADD: {
-      return [action.payload, ...state];
+    case GameActionKind.START_GAME: {
+      return { ...state, gameState: "During" };
     }
-    case GameActionKind.RESET: {
-      return [];
+    case GameActionKind.END_GAME: {
+      return { ...state, gamState: "End" };
+    }
+    case GameActionKind.RESET_GAME: {
+      return { ...state, gameState: "Idle", score: 0 };
+    }
+    case GameActionKind.ADD_SCORE: {
+      return { ...state, score: state.score + action.payload.score };
+    }
+    case GameActionKind.ADD_GUESS: {
+      return { ...state, guesses: state.guesses + action.payload.guesses };
     }
     default: {
       throw Error("Wrong or no action chosen in gameReducer!");

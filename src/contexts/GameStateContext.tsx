@@ -1,48 +1,42 @@
-import { Dispatch, createContext, useContext, useReducer } from "react";
-import {
-  CardsComparisonAndNamesArr,
-  GameAction,
-} from "../types/gameReducerTypes";
-import {
-  gameReducer,
-  initalCardsComparisonState,
-} from "../reducers/gameReducers";
-
-type CardsComparisonContextType = {
-  cardsComparisonOutcomeArr: CardsComparisonAndNamesArr;
-  dispatch: Dispatch<GameAction>;
+import { createContext, useContext, useState } from "react";
+import { UserGuessArr } from "../types/gameStateContextTypes";
+import { UserGuess } from "../types/utils";
+type GameContextType = {
+  userGuessArr: UserGuessArr;
+  addToUserGuessArr: (card: UserGuess) => void;
+  clearUserGuessArr: () => void;
 };
 
-const CardsComparisonContext = createContext<CardsComparisonContextType | null>(
-  null
-);
+const GameContext = createContext<GameContextType | null>(null);
 
-export const CardsComparisonProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [cardsComparisonOutcomeArr, dispatch] = useReducer(
-    gameReducer,
-    initalCardsComparisonState
-  );
+export const GameProvider = ({ children }: { children: React.ReactNode }) => {
+  const [userGuessArr, setUserGuessArr] = useState<UserGuessArr>([]);
+
+  const addToUserGuessArr = (card: UserGuess) => {
+    setUserGuessArr((prevArr) => [...prevArr, card]);
+  };
+  const clearUserGuessArr = () => {
+    setUserGuessArr([]);
+  };
 
   return (
-    <CardsComparisonContext.Provider
-      value={{ cardsComparisonOutcomeArr, dispatch }}
+    <GameContext.Provider
+      value={{
+        userGuessArr,
+        addToUserGuessArr,
+        clearUserGuessArr,
+      }}
     >
       {children}
-    </CardsComparisonContext.Provider>
+    </GameContext.Provider>
   );
 };
 
-export const useCardsComparisonContext = () => {
-  const ctx = useContext(CardsComparisonContext);
+export const useGameContext = () => {
+  const ctx = useContext(GameContext);
 
   if (!ctx) {
-    throw Error(
-      "Missing CardsComparisonContext, it's not wrapped in the provider"
-    );
+    throw Error("Missing UserGuessContext, it's not wrapped in the provider");
   }
 
   return ctx;

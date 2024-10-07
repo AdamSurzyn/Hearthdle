@@ -10,14 +10,14 @@ import {
   replaceIdWithName,
 } from "../utils/utils";
 import { useChosenCardContext } from "../contexts/CardsContext";
-import { useCardsComparisonContext } from "../contexts/GameStateContext";
+import { useGameContext } from "../contexts/GameStateContext";
 import { useEffect, useState } from "react";
-import { GameActionKind } from "../types/gameReducerTypes";
 import { ReplayButton } from "../components/ui/replayButton";
 
 const Game = () => {
   const currentChosenCard = useChosenCardContext();
-  const { cardsComparisonOutcomeArr, dispatch } = useCardsComparisonContext();
+  const { userGuessArr, addToUserGuessArr, clearUserGuessArr } =
+    useGameContext();
   const { error, data, isLoading } = useQuery<CardsQueryData, Error>({
     queryKey: ["cardsQuery"],
     queryFn: getAllCards,
@@ -46,21 +46,13 @@ const Game = () => {
       newRandomCard,
       newChosenCard
     );
-
-    console.log(newRandomCard);
     if (cardsComparisonOutcome?.cardNameCorrect) {
-      dispatch({
-        type: GameActionKind.RESET,
-        payload: cardsComparisonOutcome,
-      });
+      clearUserGuessArr();
       setIsReplay(true);
     } else if (cardsComparisonOutcome) {
-      dispatch({
-        type: GameActionKind.ADD,
-        payload: cardsComparisonOutcome,
-      });
+      addToUserGuessArr(cardsComparisonOutcome);
     }
-  }, [currentChosenCard, data, dispatch]); //! Czemu mi podpowiada, zebym dodal random card do tablicy zaleznosci, jesli logicznie to nie ma sensu?
+  }, [currentChosenCard, data]);
 
   if (error) {
     return <div>An error occured : {error.message}</div>;
@@ -77,7 +69,7 @@ const Game = () => {
       ) : (
         <Search />
       )}
-      <Grid cardsComparisonArr={cardsComparisonOutcomeArr} />
+      <Grid cardsComparisonArr={userGuessArr} />
       {isReplay && (
         <ReplayButton isReplay={isReplay} setIsReplay={setIsReplay} />
       )}

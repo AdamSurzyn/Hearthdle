@@ -16,6 +16,4 @@ export interface CardsComparison {
   setCorrect: boolean;
 }
 
-export interface CardsComparisonAndNames
-  extends CardWithNames,
-    CardsComparison {}
+export interface UserGuess extends CardWithNames, CardsComparison {}
