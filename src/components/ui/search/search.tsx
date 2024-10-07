@@ -43,7 +43,7 @@ const Search = () => {
   const filteredCards = data?.cards.filter((card: CardCommonAttributes) => {
     return card.name.toLowerCase().includes(searchField.toLowerCase());
   });
-  //Waits 400ms to search after input
+
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(typingTimer);
     const inputValue = e.target.value;
