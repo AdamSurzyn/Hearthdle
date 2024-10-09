@@ -56,6 +56,12 @@
     background-color: #2f3640;
     color: #dac9a1;
     font-size: 16px;
+    border: none;
+    outline: none;
+}   
+
+.search-card:focus {
+    background-color: #535f6f;
 }
 
 .scroll {
