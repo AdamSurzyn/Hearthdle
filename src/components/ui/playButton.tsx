@@ -4,7 +4,7 @@ import "../ui/playButton.scss";
 import playImage from "../../assets/playButton.png";
 const PlayButton = () => {
   return (
-    <Link to="/hearthdleGame">
+    <Link to="/hearthdleGame" className="play-button">
       <i>
         <img src={playImage} alt="Play"></img>
       </i>
