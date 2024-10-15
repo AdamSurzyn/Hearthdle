@@ -58,9 +58,11 @@
     font-size: 16px;
     border: none;
     outline: none;
+    list-style-type: none;
 }   
 
-.search-card:focus {
+.search-card--focus {
+    @extend .search-card;
     background-color: #535f6f;
 }
 

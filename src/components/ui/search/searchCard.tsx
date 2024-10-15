@@ -3,34 +3,23 @@ import { CardCommonAttributes } from "../../../types/searchTypes";
 import { useChosenCardContext } from "../../../contexts/CardsContext";
 interface SearchCardProps {
   cardData: CardCommonAttributes;
-  tabIndex?: number;
-  style?: React.CSSProperties;
-  onFocus?: () => void;
-  onKeyDown?: (e: React.KeyboardEvent) => void;
+  className: string;
 }
 
-export const SearchCard = React.forwardRef<HTMLDivElement, SearchCardProps>(
-  ({ cardData, tabIndex, style, onFocus, onKeyDown }, ref) => {
-    const { setChosenCard } = useChosenCardContext();
+export const SearchCard = (
+  { cardData, className }: SearchCardProps,
+  key: number
+) => {
+  const { setChosenCard } = useChosenCardContext();
 
-    const setCurrentChosenCard = () => {
-      setChosenCard(cardData);
-    };
-
-    return (
-      <div
-        ref={ref}
-        className="search-card"
-        onClick={setCurrentChosenCard}
-        tabIndex={tabIndex}
-        style={style}
-        onFocus={onFocus}
-        onKeyDown={onKeyDown}
-      >
-        {cardData.name}
-      </div>
-    );
-  }
-);
+  const setCurrentChosenCard = () => {
+    setChosenCard(cardData);
+  };
+  return (
+    <li className={className} onClick={setCurrentChosenCard} key={key}>
+      {cardData.name}
+    </li>
+  );
+};
 
 export default SearchCard;
