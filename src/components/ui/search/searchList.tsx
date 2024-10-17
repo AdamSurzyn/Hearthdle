@@ -12,7 +12,7 @@ const SearchList = ({ filteredCards, focusIndex }: FilteredCardsProps) => {
   }
 
   return (
-    <ul tabIndex={0} style={{ outline: "none" }}>
+    <ul tabIndex={0}>
       {filteredCards.map((card, index) => (
         <SearchCard
           cardData={card}

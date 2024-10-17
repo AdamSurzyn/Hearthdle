@@ -65,11 +65,7 @@ const Search = ({ gameState }: GameScoreType) => {
           : "card-search-container-disabled"
       }
     >
-      <div
-        ref={searchRef}
-        className="card-search-list-container"
-        onKeyDown={handleKeyDown}
-      >
+      <div className="card-search-list-container" onKeyDown={handleKeyDown}>
         <input
           className="card-search"
           type="search"
