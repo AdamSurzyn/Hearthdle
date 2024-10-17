@@ -59,6 +59,7 @@
     border: none;
     outline: none;
     list-style-type: none;
+    list-style-position: inside;
 }   
 
 .search-card--focus {
@@ -75,4 +76,8 @@
     left: 0;
     width: 100%;
     z-index: 1;
+
+    ul {
+        padding: 0px;
+    }
 }
