@@ -11,7 +11,7 @@ export const ReplayModal = ({ onReset, gameState }: ReplayModalProps) => {
     <div className="replay-modal">
       <ReplayScore gameState={gameState}></ReplayScore>
       <ReplayButton onReset={onReset}></ReplayButton>
-      <ReturnButton></ReturnButton>
+      <ReturnButton />
     </div>,
     document.body
   );
