@@ -1,4 +1,4 @@
-$primary-color: #9553cb;
+$primary-color: #2f3640;
 $secondary-color: #cd8e37;
 $text-color: #f1faee;
 
@@ -6,7 +6,7 @@ $text-color: #f1faee;
     margin: 40px auto;
     padding: 20px;
     background-color: $primary-color;
-    background-color: rgba($primary-color, 0.3);
+    background-color: rgba($primary-color, 0.5);
     border-radius: 10px;
     color: $text-color;
     max-width: 800px;
@@ -14,7 +14,7 @@ $text-color: #f1faee;
 
     h1 {
         text-align: center;
-        font-size: 2.5rem;
+        font-size: 3.5rem;
         color: $secondary-color;
         margin-bottom: 20px;
     }

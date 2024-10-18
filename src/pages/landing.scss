@@ -1,10 +1,14 @@
-@import url("https: //fonts.googleapis.com/css2?family=Aboreto&display=swap");
 
 $bg-image: url("../assets/1920x1080-hearthstone-background-1920-x-1080-2cx6b3fx3zpz876m.webp");
 $primary-color: #9553cb;
 $secondary-color: #cd8e37;
 $accent-color: #e63946;
 $text-color: #f1faee;
+
+@font-face {
+    font-family: 'hs-font';
+    src: url('../assets/LHF\ Uncial\ Caps.ttf');
+}
 
 @mixin darkened-background {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), $bg-image;
@@ -14,6 +18,7 @@ $text-color: #f1faee;
 
 .landing-container {
     @include darkened-background;
+    font-family: 'hs-font';
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,8 +28,11 @@ $text-color: #f1faee;
     h1, .footer, a, .instruction .center{
         place-self: center;
     }
-
+    .footer{
+        color: #969a94;
+    }
 }
+
 
 @media (max-width: 768px) {
     .container {
@@ -35,4 +43,5 @@ $text-color: #f1faee;
 .landing-header {
     text-align: center;
     color: $primary-color;
+    font-size: 3.5rem;
 }
