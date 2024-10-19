@@ -2,8 +2,8 @@ $footer-background-color: #2b2d42;
 $text-color: #f1faee;
 $accent-color: #e63946;
 
-.landing-footer {
-    background-color: $footer-background-color;
+.footer {
+    background-color: rgba($footer-background-color, 0.3);
     padding: 20px;
     width: 100%;
     color: $text-color;
