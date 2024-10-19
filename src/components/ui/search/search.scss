@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'hs-font';
+    src: url('../../../assets/LHF\ Uncial\ Caps.ttf');
+}
+
 @mixin search-style{
     background: #2f3640;
     color: #dac9a1;
@@ -9,6 +14,7 @@
     justify-content: center;
 }
 .card-search-container{
+    font-family: 'hs-font';
     @include center-flex()
 }
 
@@ -35,6 +41,7 @@
     text-align: justify;
     letter-spacing: 3px;
     font-size: large;
+    font-family: 'hs-font';
 }
 
 
