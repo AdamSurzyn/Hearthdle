@@ -8,10 +8,10 @@ import "./landing.scss";
 const Landing = () => {
   return (
     <div className="landing-container">
-      <Header></Header>
-      <Instruction></Instruction>
-      <PlayButton></PlayButton>
-      <Footer></Footer>
+      <Header />
+      <Instruction />
+      <PlayButton />
+      <Footer />
     </div>
   );
 };
