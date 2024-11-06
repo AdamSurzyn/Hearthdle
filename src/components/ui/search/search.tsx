@@ -44,16 +44,23 @@ const Search = ({ gameState }: GameScoreType) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setFocusedIndex((prev) =>
-        prev < filteredCards.length - 1 ? prev + 1 : prev
-      );
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setFocusedIndex((prev) => (prev > 0 ? prev - 1 : prev));
-    } else if (e.key === "Enter") {
-      setChosenCard(filteredCards[focusedIndex]);
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setFocusedIndex((prev) =>
+          prev < filteredCards.length - 1 ? prev + 1 : prev
+        );
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setFocusedIndex((prev) =>
+          prev < filteredCards.length - 1 ? prev + 1 : prev
+        );
+        break;
+      case "Enter":
+        setChosenCard(filteredCards[focusedIndex]);
+        break;
+      default:
     }
   };
 
