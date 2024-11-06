@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { SearchCard } from "./searchCard";
 import { CardCommonAttributes } from "../../../types/searchTypes";
-interface FilteredCardsProps {
+interface Props {
   filteredCards: CardCommonAttributes[];
-  focusIndex: number;
+  focusedIndex: number;
 }
 
-const SearchList = ({ filteredCards, focusIndex }: FilteredCardsProps) => {
+const SearchList = ({ filteredCards, focusedIndex }: Props) => {
   if (filteredCards.length === 0) {
     return <div>Opps! No cards match your search.</div>;
   }
@@ -17,7 +17,7 @@ const SearchList = ({ filteredCards, focusIndex }: FilteredCardsProps) => {
         <SearchCard
           cardData={card}
           className={
-            index === focusIndex ? "search-card--focus" : "search-card"
+            index === focusedIndex ? "search-card--focus" : "search-card"
           }
           key={card.id}
         />
