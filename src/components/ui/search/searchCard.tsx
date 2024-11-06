@@ -22,16 +22,11 @@ export const SearchCard = (
     }
   }, [className]);
 
-  const setCurrentChosenCard = () => {
+  const handleItemClick = () => {
     setChosenCard(cardData);
   };
   return (
-    <li
-      className={className}
-      onClick={setCurrentChosenCard}
-      key={key}
-      ref={cardRef}
-    >
+    <li className={className} onClick={handleItemClick} key={key} ref={cardRef}>
       {cardData.name}
     </li>
   );
