@@ -94,7 +94,6 @@ const Search = ({ gameState }: GameScoreType) => {
           </Scroll>
         )}
       </div>
-      <button className="search-button">Search</button>
     </div>
   );
 };
