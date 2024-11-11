@@ -17,7 +17,7 @@ $bg-image: url("../assets/1920x1080-hearthstone-background-1920-x-1080-2cx6b3fx3
     justify-content: center;
     grid-template-rows: repeat(4, 1fr);
     grid-template-columns: 1fr;
-    font-family: "Aboreto";
+    font-family: "Aboreto", sans-serif;
     width: 100%;
     padding: 20px 0px;
 }
@@ -29,7 +29,6 @@ $bg-image: url("../assets/1920x1080-hearthstone-background-1920-x-1080-2cx6b3fx3
 }
 
 .spinner {
-    /* change color here */
     color: #cc8100
 }
 
