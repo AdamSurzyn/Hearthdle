@@ -15,6 +15,7 @@
 }
 .card-search-container{
     font-family: 'hs-font';
+    letter-spacing: 1px;
     @include center-flex()
 }
 
@@ -39,7 +40,7 @@
     border-radius: 5px;
     height: 57px;
     text-align: justify;
-    letter-spacing: 3px;
+    letter-spacing: 1.3px;
     font-size: large;
     font-family: 'hs-font';
 }
