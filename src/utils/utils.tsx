@@ -77,3 +77,13 @@ const compareManaCost = (
 export const calculatePercentOfWins = (wins: number, games: number): number => {
   return Math.ceil((wins / games) * 100);
 };
+
+export const rmDupCards = (data: CardCommonAttributes[]) => {
+  const newData = [...data];
+  let names: Record<string, boolean> = {};
+  const rmDupArr = newData.filter((card) => {
+    return names.hasOwnProperty(card.name) ? false : (names[card.name] = true);
+  });
+
+  return rmDupArr;
+};

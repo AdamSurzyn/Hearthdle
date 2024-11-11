@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import { getAllCards } from "../../../api/getCards";
 import { GameScoreType } from "../../../types/modalTypes";
 import { useChosenCardContext } from "../../../contexts/CardsContext";
+import { rmDupCards } from "../../../utils/utils";
 
 const Search = ({ gameState }: GameScoreType) => {
   const [searchField, setSearchField] = useState("");
@@ -42,6 +43,8 @@ const Search = ({ gameState }: GameScoreType) => {
     return card.name.toLowerCase().includes(searchField.toLowerCase());
   });
 
+  const uniqueCards = rmDupCards(filteredCards);
+
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setSearchField(inputValue);
@@ -53,17 +56,17 @@ const Search = ({ gameState }: GameScoreType) => {
       case "ArrowDown":
         e.preventDefault();
         setFocusedIndex((prev) =>
-          prev < filteredCards.length - 1 ? prev + 1 : prev
+          prev < uniqueCards.length - 1 ? prev + 1 : prev
         );
         break;
       case "ArrowUp":
         e.preventDefault();
         setFocusedIndex((prev) =>
-          prev < filteredCards.length - 1 ? prev + 1 : prev
+          prev < uniqueCards.length - 1 ? prev + 1 : prev
         );
         break;
       case "Enter":
-        handleCurrentChosenCard(filteredCards[focusedIndex]);
+        handleCurrentChosenCard(uniqueCards[focusedIndex]);
         break;
       default:
     }
@@ -89,7 +92,7 @@ const Search = ({ gameState }: GameScoreType) => {
           <Scroll>
             <SearchList
               handleCurrentCard={handleCurrentChosenCard}
-              filteredCards={filteredCards}
+              uniqueCards={uniqueCards}
             ></SearchList>
           </Scroll>
         )}

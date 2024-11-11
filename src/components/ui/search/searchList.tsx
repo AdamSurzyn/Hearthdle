@@ -3,18 +3,18 @@ import { SearchCard } from "./searchCard";
 import { CardCommonAttributes } from "../../../types/searchTypes";
 
 interface FilteredCardsProps {
-  filteredCards: CardCommonAttributes[];
+  uniqueCards: CardCommonAttributes[];
   handleCurrentCard: (cardData: CardCommonAttributes) => void;
 }
 
 const SearchList: React.FC<FilteredCardsProps> = ({
-  filteredCards,
+  uniqueCards,
   handleCurrentCard,
 }) => {
-  if (filteredCards.length === 0) {
+  if (uniqueCards.length === 0) {
     return <div>Opps! No cards match your search.</div>;
   }
-  const cards = filteredCards.map((card) => (
+  const cards = uniqueCards.map((card) => (
     <SearchCard
       key={card.id}
       cardData={card}
