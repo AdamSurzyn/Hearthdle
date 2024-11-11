@@ -1,16 +1,18 @@
 import React from "react";
 import { CardCommonAttributes } from "../../../types/searchTypes";
-import { useChosenCardContext } from "../../../contexts/CardsContext";
 interface SearchCardProps {
   cardData: CardCommonAttributes;
+  handleCurrentCard: (cardData: CardCommonAttributes) => void;
 }
 
-export const SearchCard: React.FC<SearchCardProps> = ({ cardData }) => {
-  const { setChosenCard } = useChosenCardContext();
-
+export const SearchCard: React.FC<SearchCardProps> = ({
+  cardData,
+  handleCurrentCard,
+}) => {
   const setCurrentChosenCard = () => {
-    setChosenCard(cardData);
+    handleCurrentCard(cardData);
   };
+
   return (
     <div className="search-card" onClick={setCurrentChosenCard}>
       {cardData.name}
