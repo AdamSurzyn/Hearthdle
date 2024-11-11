@@ -2,12 +2,13 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    min-width: 150px;
+    min-width: 50px;
     min-height: inherit;
     border: solid 2px black;
 }
 
 .cards-grid-container{
+    padding: 10px;
     display: grid;
     grid-template-rows: repeat(auto-fit, minmax(50px, 150px));
     grid-gap: 20px;

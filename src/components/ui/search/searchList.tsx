@@ -12,7 +12,9 @@ const SearchList: React.FC<FilteredCardsProps> = ({
   handleCurrentCard,
 }) => {
   if (uniqueCards.length === 0) {
-    return <div>Opps! No cards match your search.</div>;
+    return (
+      <div className="no-such-cards">Opps! No cards match your search.</div>
+    );
   }
   const cards = uniqueCards.map((card) => (
     <SearchCard
