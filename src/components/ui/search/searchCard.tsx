@@ -26,7 +26,7 @@ export const SearchCard = (
     setChosenCard(cardData);
   };
   return (
-    <li className={className} onClick={handleItemClick} key={key} ref={cardRef}>
+    <li className={className} onClick={handleItemClick} ref={cardRef}>
       {cardData.name}
     </li>
   );

@@ -54,9 +54,7 @@ const Search = ({ gameState }: GameScoreType) => {
       }
       case "ArrowUp": {
         e.preventDefault();
-        setFocusedIndex((prev) =>
-          prev < filteredCards.length - 1 ? prev + 1 : prev
-        );
+        setFocusedIndex((prev) => (prev > 0 ? prev - 1 : prev));
         break;
       }
       case "Enter": {
