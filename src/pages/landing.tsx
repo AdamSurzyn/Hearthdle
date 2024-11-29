@@ -7,11 +7,11 @@ import "./landing.scss";
 
 const Landing = () => {
   return (
-    <div className="container">
-      <Header></Header>
-      <Instruction></Instruction>
-      <PlayButton></PlayButton>
-      <Footer></Footer>
+    <div className="landing-container">
+      <Header />
+      <Instruction />
+      <PlayButton />
+      <Footer />
     </div>
   );
 };
