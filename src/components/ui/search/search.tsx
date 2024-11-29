@@ -45,21 +45,24 @@ const Search = ({ gameState }: GameScoreType) => {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     switch (e.key) {
-      case "ArrowDown":
+      case "ArrowDown": {
         e.preventDefault();
         setFocusedIndex((prev) =>
           prev < filteredCards.length - 1 ? prev + 1 : prev
         );
         break;
-      case "ArrowUp":
+      }
+      case "ArrowUp": {
         e.preventDefault();
         setFocusedIndex((prev) =>
           prev < filteredCards.length - 1 ? prev + 1 : prev
         );
         break;
-      case "Enter":
+      }
+      case "Enter": {
         setChosenCard(filteredCards[focusedIndex]);
         break;
+      }
       default:
     }
   };
@@ -84,7 +87,7 @@ const Search = ({ gameState }: GameScoreType) => {
           <Scroll>
             <SearchList
               filteredCards={filteredCards}
-              focusIndex={focusedIndex}
+              focusedIndex={focusedIndex}
             ></SearchList>
           </Scroll>
         )}
