@@ -1,141 +1,134 @@
-@font-face {
-    font-family: 'hs-font';
-    src: url('../../assets/LHF\ Uncial\ Caps.ttf');
-}
-
 .play-button,
 .play-button *,
 .play-button :after,
 .play-button :before,
 .play-button:after,
 .play-button:before {
-    border: 0 solid;
-    box-sizing: border-box;
+  border: 0 solid;
+  box-sizing: border-box;
 }
 
 .play-button {
-    font-family: 'hs-font', sans-serif;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-appearance: button;
-    background-color: #2f3640;
-    background-image: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 100%;
-    line-height: 1.5;
-    margin: 0 auto;
-    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
-    padding: 0;
+  font-family: "hs-font", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #2f3640;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0 auto;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
 }
 
 .play-button:disabled {
-    cursor: default;
+  cursor: default;
 }
 
 .play-button:-moz-focusring {
-    outline: auto;
+  outline: auto;
 }
 
 .play-button svg {
-    display: block;
-    vertical-align: middle;
+  display: block;
+  vertical-align: middle;
 }
 
 .play-button [hidden] {
-    display: none;
+  display: none;
 }
 
 .play-button {
-    background: none;
-    box-sizing: border-box;
-    color: #dac9a1;
-    display: block;
-    font-weight: 900;
-    -webkit-mask-image: none;
-    padding: 1.5rem 4rem;
-    position: relative;
-    padding: 1.5rem 4rem;    
-    margin: 0 auto;
+  background: none;
+  box-sizing: border-box;
+  color: #dac9a1;
+  display: block;
+  font-weight: 900;
+  -webkit-mask-image: none;
+  padding: 1.5rem 4rem;
+  position: relative;
+  padding: 1.5rem 4rem;
+  margin: 0 auto;
 }
 
 .play-button span {
-    background: #2f3640;
-    border: 3px solid #cc8100;
-    border-radius: 999px;
-    display: grid;
-    inset: 0;
-    place-items: center;
-    pointer-events: none;
-    position: absolute;
+  background: #2f3640;
+  border: 3px solid #cc8100;
+  border-radius: 999px;
+  display: grid;
+  inset: 0;
+  place-items: center;
+  pointer-events: none;
+  position: absolute;
 }
 
 .play-button:hover span {
-    -webkit-animation: rubberBand 0.8s;
-    animation: rubberBand 0.8s;
+  -webkit-animation: rubberBand 0.8s;
+  animation: rubberBand 0.8s;
 }
 
 @-webkit-keyframes rubberBand {
-    0% {
-        transform: scaleX(1);
-    }
+  0% {
+    transform: scaleX(1);
+  }
 
-    30% {
-        transform: scale3d(1.25, 0.75, 1);
-    }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
 
-    40% {
-        transform: scale3d(0.75, 1.25, 1);
-    }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
 
-    50% {
-        transform: scale3d(1.15, 0.85, 1);
-    }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
 
-    65% {
-        transform: scale3d(0.95, 1.05, 1);
-    }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
 
-    75% {
-        transform: scale3d(1.05, 0.95, 1);
-    }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
 
-    to {
-        transform: scaleX(1);
-    }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 @keyframes rubberBand {
-    0% {
-        transform: scaleX(1);
-    }
+  0% {
+    transform: scaleX(1);
+  }
 
-    30% {
-        transform: scale3d(1.25, 0.75, 1);
-    }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
 
-    40% {
-        transform: scale3d(0.75, 1.25, 1);
-    }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
 
-    50% {
-        transform: scale3d(1.15, 0.85, 1);
-    }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
 
-    65% {
-        transform: scale3d(0.95, 1.05, 1);
-    }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
 
-    75% {
-        transform: scale3d(1.05, 0.95, 1);
-    }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
 
-    to {
-        transform: scaleX(1);
-    }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .play-button-container {
-
-    grid-row-start: 8;
-
+  grid-row-start: 8;
 }
