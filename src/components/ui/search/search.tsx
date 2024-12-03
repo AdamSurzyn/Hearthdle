@@ -9,7 +9,7 @@ import { useQuery } from "react-query";
 import { getAllCards } from "../../../api/getCards";
 import { GameScoreType } from "../../../types/modalTypes";
 import { useChosenCardContext } from "../../../contexts/CardsContext";
-import { rmDupCards } from "../../../utils/utils";
+import { removeDuplicateCards } from "../../../utils/utils";
 
 const Search = ({ gameState }: GameScoreType) => {
   const [searchField, setSearchField] = useState("");
@@ -43,7 +43,7 @@ const Search = ({ gameState }: GameScoreType) => {
     return card.name.toLowerCase().includes(searchField.toLowerCase());
   });
 
-  const uniqueCards = rmDupCards(filteredCards);
+  const uniqueCards = removeDuplicateCards(filteredCards);
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
