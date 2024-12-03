@@ -23,10 +23,20 @@
   box-sizing: border-box;
 
   &-container {
-    padding: 10px;
     font-family: "hs-font";
     letter-spacing: 1px;
-    @include center-flex();
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 1200px;
+    z-index: 10;
+
+    @media (max-width: 600px) {
+      width: 90%;
+      max-width: 450px;
+    }
 
     &-disabled {
       @include center-flex();
@@ -36,17 +46,9 @@
   }
 
   &-list-container {
-    position: relative;
-    width: max(70%, 300px);
+    @include center-flex();
+    width: 100%;
     box-sizing: border-box;
-
-    @media (max-width: 600px) {
-      width: 100%;
-    }
-
-    @media (min-width: 1024px) {
-      width: 70%;
-    }
   }
 }
 
