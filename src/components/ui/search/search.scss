@@ -76,20 +76,18 @@
 
 .search-card {
   @include search-style();
-  margin-top: 8px;
   padding: 8px 16px;
   background-color: #2f3640;
   color: #dac9a1;
   font-size: 16px;
   border: none;
   box-sizing: border-box;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.1s;
   transform-origin: left center;
   width: 100%;
 
   &:hover {
     background-color: #cc8100;
-    transform: scale(1.08);
     cursor: pointer;
   }
 
