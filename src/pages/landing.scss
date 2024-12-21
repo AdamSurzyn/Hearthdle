@@ -13,20 +13,19 @@ $text-color: #f1faee;
 .landing-container {
   @include darkened-background;
   font-family: "hs-font";
-  display: flex;
-  flex-direction: column;
+  display: grid;
   align-items: center;
   justify-content: center;
-  padding: 20px;
   min-height: 100vh;
+  grid-template-rows: auto;
   h1,
-  .footer,
   a,
   .instruction .center {
     place-self: center;
   }
   .footer {
     color: #969a94;
+    align-self: flex-end;
   }
 }
 
