@@ -24,14 +24,16 @@
 
   &-container {
     font-family: "hs-font";
+    margin-bottom: 40px;
     letter-spacing: 1px;
-    position: absolute;
+    position: relative;
     top: 2%;
     left: 50%;
     transform: translateX(-50%);
     width: 70%;
     max-width: 1200px;
     z-index: 10;
+    flex-shrink: 0;
 
     @media (max-width: 600px) {
       width: 90%;
