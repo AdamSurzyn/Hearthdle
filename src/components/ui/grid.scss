@@ -1,55 +1,113 @@
 @mixin common-prop-styles {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    min-width: 150px;
-    min-height: inherit;
-    border: solid 2px black;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border: solid 2px black;
+  text-align: center;
+  padding: 10px;
+  margin: 0;
 }
 
-.cards-grid-container{
-    display: grid;
-    grid-template-rows: repeat(auto-fit, minmax(50px, 150px));
-    grid-gap: 20px;
-    align-items: center;
-    justify-content: center;
-    grid-row: 3 / 4 ;
+.cards-grid-container {
+  display: grid;
+  grid-gap: 10px;
+  align-items: start;
+  justify-content: center;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
-.card-comparison {
+.answer-titles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+  border-bottom: 3px;
+}
+
+.title {
+  border-bottom: 3px solid;
+  width: 90%;
+}
+
+.card {
+  &-comparison {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
     justify-content: center;
-    border: solid 2px black;
-    min-height: 100px;
+    min-height: 80px;
+    gap: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
 
-}
-
-.card-prop-right {
+  &-prop-right,
+  &-prop-wrong,
+  &-prop-mana-up,
+  &-prop-mana-down {
     @include common-prop-styles();
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: clamp(12px, 1.25vw, 16px);
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &-prop-right {
     background-color: rgb(82, 179, 70);
-}
 
-.card-prop-wrong {
-    @include common-prop-styles();
+    @media (max-width: 1024px) {
+      max-width: 80px;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  &-prop-wrong {
     background-color: #b52222;
-}
 
-.card-prop-mana-up {
-    @include common-prop-styles();
+    @media (max-width: 1024px) {
+      max-width: 80px;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  &-prop-mana-up {
     background-image: url("../../assets/red-arrow-up.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-color: transparent;
-}
 
-.card-prop-mana-down {
-    @include common-prop-styles();
+    @media (max-width: 1024px) {
+      width: 80px;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  &-prop-mana-down {
     background-image: url("../../assets/red-arrow-down.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-color: transparent;
+
+    @media (max-width: 1024px) {
+      width: 80px;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
 }

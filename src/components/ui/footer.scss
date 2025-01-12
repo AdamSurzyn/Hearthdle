@@ -1,0 +1,26 @@
+$footer-background-color: #2b2d42;
+$text-color: #f1faee;
+$accent-color: #e63946;
+
+.footer {
+  background-color: rgba($footer-background-color, 0.3);
+  padding: 20px;
+  color: $text-color;
+  text-align: center;
+  font-size: 0.9rem;
+
+  p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+  }
+
+  a {
+    color: $accent-color;
+    text-decoration: underline;
+
+    &:hover {
+      color: lighten($accent-color, 10%);
+    }
+  }
+}

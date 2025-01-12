@@ -17,7 +17,7 @@ export const GameContextProvider = ({
   const [userGuessArr, setUserGuessArr] = useState<UserGuessArr>([]);
 
   const addToUserGuessArr = (card: UserGuess) => {
-    setUserGuessArr((prevArr) => [...prevArr, card]);
+    setUserGuessArr((prevArr) => [card, ...prevArr]);
   };
   const clearUserGuessArr = () => {
     setUserGuessArr([]);

@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../ui/playButton.scss";
-import playImage from "../../assets/playButton.png";
 const PlayButton = () => {
   return (
     <Link to="/hearthdleGame">
-      <i>
-        <img src={playImage} alt="Play"></img>
-      </i>
+      <div className="play-button-container">
+        <button className="play-button">
+          <span>Play!</span>
+        </button>
+      </div>
     </Link>
   );
 };

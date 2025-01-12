@@ -9,6 +9,8 @@ import { useQuery } from "react-query";
 import { getAllCards } from "../../../api/getCards";
 import { GameScoreType } from "../../../types/modalTypes";
 import { useChosenCardContext } from "../../../contexts/CardsContext";
+import { removeDuplicateCards } from "../../../utils/utils";
+
 const Search = ({ gameState }: GameScoreType) => {
   const [searchField, setSearchField] = useState("");
 
@@ -28,6 +30,10 @@ const Search = ({ gameState }: GameScoreType) => {
   if (isLoading) {
     return <div className="card-search-container">Loading...</div>;
   }
+  const handleCurrentChosenCard = (cardData: CardCommonAttributes) => {
+    setShowResults(false);
+    setChosenCard(cardData);
+  };
 
   if (error) {
     return <div>An error occured : {error.message}</div>;
@@ -36,6 +42,8 @@ const Search = ({ gameState }: GameScoreType) => {
   const filteredCards = data?.cards.filter((card: CardCommonAttributes) => {
     return card.name.toLowerCase().includes(searchField.toLowerCase());
   });
+
+  const uniqueCards = removeDuplicateCards(filteredCards);
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -90,7 +98,6 @@ const Search = ({ gameState }: GameScoreType) => {
           </Scroll>
         )}
       </div>
-      <button className="search-button">Search</button>
     </div>
   );
 };

@@ -1,11 +1,55 @@
-$instruction-min-margin: 6px;
-$instruction-max-margin: 8px;
+$primary-color: #2f3640;
+$secondary-color: #cd8e37;
+$text-color: #f1faee;
 
 .instruction {
-    display: grid;
-    padding-left: 15px;
-}
+  margin: 40px auto;
+  padding: 20px;
+  background-color: $primary-color;
+  background-color: rgba($primary-color, 0.5);
+  border-radius: 10px;
+  color: $text-color;
+  max-width: 800px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
-.instruction *:not(li) {
-    margin-left: max(#{$instruction-max-margin}, $instruction-min-margin);
+  @media (min-width: 1024px) {
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 3.5rem;
+    color: $secondary-color;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    color: $secondary-color;
+    margin-top: 20px;
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: 15px;
+    padding: 10px;
+    li {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: 20px;
+    }
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: $text-color;
+  }
+
+  @media screen {
+  }
 }

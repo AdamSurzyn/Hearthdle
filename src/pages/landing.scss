@@ -1,23 +1,43 @@
-@import url("https: //fonts.googleapis.com/css2?family=Aboreto&display=swap");
-
 $bg-image: url("../assets/1920x1080-hearthstone-background-1920-x-1080-2cx6b3fx3zpz876m.webp");
+$primary-color: #9553cb;
+$secondary-color: #cd8e37;
+$accent-color: #e63946;
+$text-color: #f1faee;
 
 @mixin darkened-background {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), $bg-image;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), $bg-image;
+  background-size: cover;
+  background-position: center;
 }
 
 .landing-container {
-    @include darkened-background;
-    color: white;
-    display: grid;
-    font-family: "Aboreto";
-    width: 100%;
-    padding: 20px 0px;
-    h1, .landing-footer, a, p, .center, h3{
-        place-self: center;
-    }
+  @include darkened-background;
+  font-family: "hs-font";
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  grid-template-rows: auto;
+  h1,
+  a,
+  .instruction .center {
+    place-self: center;
+  }
+  .footer {
+    color: #969a94;
+    align-self: flex-end;
+  }
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+}
+
+.landing-header {
+  text-align: center;
+  color: $primary-color;
+  font-size: 3.5rem;
+}

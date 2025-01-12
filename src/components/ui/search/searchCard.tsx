@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { CardCommonAttributes } from "../../../types/searchTypes";
-import { useChosenCardContext } from "../../../contexts/CardsContext";
-interface SearchCardProps {
+interface Props {
   cardData: CardCommonAttributes;
   className: string;
 }
@@ -25,6 +24,7 @@ export const SearchCard = (
   const handleItemClick = () => {
     setChosenCard(cardData);
   };
+
   return (
     <li className={className} onClick={handleItemClick} ref={cardRef}>
       {cardData.name}

@@ -1,84 +1,160 @@
-@mixin search-style{
-    background: #2f3640;
-    color: #dac9a1;
-    border: 3px solid #cc8100;
+@mixin search-style {
+  background: #2f3640;
+  color: #dac9a1;
+  border: 3px solid #cc8100;
 }
-@mixin center-flex{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.card-search-container{
-    @include center-flex()
+@mixin center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.card-search-container-disabled{
-    @include center-flex();
-    pointer-events: none;
-    opacity: 0.6;
-}
+.card-search {
+  @include search-style();
+  width: 100%;
+  padding: 8px 16px;
+  height: 57px;
+  outline: none;
+  border-radius: 5px 5px 0px 0px;
+  text-align: justify;
+  letter-spacing: 1.2px;
+  font-size: large;
+  font-family: "hs-font";
+  box-sizing: border-box;
 
-.card-search-list-container {
+  &-container {
+    font-family: "hs-font";
+    margin-bottom: 40px;
+    letter-spacing: 1px;
     position: relative;
-    width: max(70%, 300px);
-    
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 1200px;
+    z-index: 10;
+    flex-shrink: 0;
+
+    @media (max-width: 600px) {
+      width: 90%;
+      max-width: 450px;
+    }
+
+    &-disabled {
+      @include center-flex();
+      pointer-events: none;
+      opacity: 0.6;
+    }
+  }
+
+  &-list-container {
+    @include center-flex();
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
-.card-search{
-    @include search-style();
-    border-right: none;
-    min-width: 100%;
-    padding: 5px;
-    height: 20px;
-    outline: none;
-    border-radius: 5px 0 0 5px;
-    height: 57px;
-    text-align: justify;
-    letter-spacing: 3px;
-    font-size: large;
+.scroll::-webkit-scrollbar {
+  width: 15px;
 }
 
-.search-button{
-    @include search-style();
-    height: 57px;
-    min-width: 50px;
-    border-left: none;
-    border-radius: 0 5px 5px 0;
-    text-align: justify;
-    letter-spacing: 2px;
-    font-size: larger;
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #cc8100;
+  border-radius: 5px;
+  border: 3px solid #2f3640;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: #2f3640;
+}
+
+.scroll::-webkit-scrollbar-button {
+  background-color: transparent;
+}
+
+.scroll::-webkit-scrollbar-corner {
+  background-color: transparent;
 }
 
 .search-card {
-    @include search-style();
-    margin-top: 8px;
-    padding: 8px;
-    background-color: #2f3640;
-    color: #dac9a1;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    list-style-type: none;
-    list-style-position: inside;
-}   
+  @include search-style();
+  padding: 8px 16px;
+  background-color: #2f3640;
+  color: #dac9a1;
+  font-size: 16px;
+  border: none;
+  box-sizing: border-box;
+  transition: background-color 0s;
+  transform-origin: left center;
+  width: 100%;
 
-.search-card--focus {
-    @extend .search-card;
-    background-color: #535f6f;
+  &:hover {
+    background-color: #cc8100;
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
 }
 
 .scroll {
-    @include search-style();
-    overflow-y: scroll;
-    height: 30vh;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    z-index: 1;
+  @include search-style();
+  margin-top: 8px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 30vh;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  box-sizing: border-box;
+  border-width: 3px;
+  border-radius: 0px 0px 5px 5px;
 
-    ul {
-        padding: 0px;
-        outline: none;
-    }
+  @media (max-width: 600px) {
+    max-height: 200px;
+  }
+
+  @media (max-width: 768px) {
+    max-height: 25vh;
+  }
+
+  @media (min-width: 1024px) {
+    max-height: 30vh;
+  }
+}
+
+.no-such-cards {
+  color: #c2979c;
+  border-radius: 5px;
+  padding: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-family: "Arial", sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #5a0811;
+    padding: 16px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+    padding: 8px;
+  }
 }
