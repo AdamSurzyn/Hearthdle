@@ -16,7 +16,7 @@
   background-image: none;
   color: #fff;
   cursor: pointer;
-  font-size: 100%;
+  font-size: 200%;
   line-height: 1.5;
   margin: 0 auto;
   -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
@@ -47,16 +47,16 @@
   display: block;
   font-weight: 900;
   -webkit-mask-image: none;
-  padding: 1.5rem 4rem;
+  padding: 2.5rem 6rem;
   position: relative;
-  padding: 1.5rem 4rem;
+  padding: 2.5rem 6rem;
   margin: 0 auto;
 }
 
 .play-button span {
   background: #2f3640;
-  border: 3px solid #cc8100;
-  border-radius: 999px;
+  border: 5px solid #cc8100;
+  border-radius: 15px;
   display: grid;
   inset: 0;
   place-items: center;

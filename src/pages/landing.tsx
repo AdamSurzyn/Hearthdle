@@ -9,8 +9,8 @@ const Landing = () => {
   return (
     <div className="landing-container">
       <Header></Header>
-      <Instruction></Instruction>
       <PlayButton></PlayButton>
+      <Instruction></Instruction>
       <Footer></Footer>
     </div>
   );
